@@ -14,9 +14,7 @@ class _FinanceViewState extends State<FinanceView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 0, 38, 99),
-      ),
+      color: const Color.fromARGB(255, 15, 15, 15),
       height: 140,
       child: const Padding(
         padding: EdgeInsets.symmetric(

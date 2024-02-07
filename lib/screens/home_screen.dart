@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recycle_mania/views/dashboard.dart';
 import '../views/finance_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,16 +12,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
-          const FinanceView(),
+          FinanceView(),
           Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
-            ),
+            child: Dashboard(),
           ),
         ],
       ),

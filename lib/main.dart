@@ -7,6 +7,7 @@ void main() {
 
 const defaultTextStyle = TextStyle(
   fontSize: 16,
+  color: Colors.white,
 );
 
 class RecycleMania extends StatelessWidget {
@@ -17,7 +18,7 @@ class RecycleMania extends StatelessWidget {
     return MaterialApp(
       title: 'Recycle Mania',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 25, 25, 25),
         textTheme: Theme.of(context).textTheme.copyWith(
               bodyLarge: defaultTextStyle,
               bodySmall: defaultTextStyle,

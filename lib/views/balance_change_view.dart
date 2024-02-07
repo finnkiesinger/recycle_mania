@@ -9,7 +9,7 @@ class BalanceChangeView extends StatefulWidget {
 }
 
 Color? getColor(double roc, {double base = 1000}) {
-  return roc > 0 ? Colors.green[800] : Colors.red[900];
+  return roc > 0 ? Colors.green : Colors.red;
 }
 
 class _BalanceChangeViewState extends State<BalanceChangeView> {

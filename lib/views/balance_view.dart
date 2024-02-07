@@ -8,6 +8,8 @@ class BalanceView extends StatefulWidget {
   State<BalanceView> createState() => _BalanceViewState();
 }
 
+var baseColor = Colors.blue;
+
 class _BalanceViewState extends State<BalanceView> {
   double get _balance => 50000;
 
@@ -20,7 +22,7 @@ class _BalanceViewState extends State<BalanceView> {
           height: 40,
           width: 150,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.5),
+            color: baseColor.withOpacity(0.8),
             borderRadius: BorderRadius.circular(14),
           ),
           child: Row(
@@ -47,12 +49,12 @@ class _BalanceViewState extends State<BalanceView> {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: baseColor,
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Icon(
+          child: const Icon(
             Icons.savings_rounded,
-            color: Colors.blue[800],
+            color: Colors.white,
             size: 28,
           ),
         ),
