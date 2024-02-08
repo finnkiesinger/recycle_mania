@@ -32,7 +32,7 @@ class _ResourcesViewState extends State<ResourcesView> {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  resource.icon,
+                  resource.icon.icon,
                   color: Colors.white,
                 ),
               ),

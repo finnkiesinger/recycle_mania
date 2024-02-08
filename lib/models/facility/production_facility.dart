@@ -10,6 +10,9 @@ class ProductionFacility extends IOFacility<Resource, Product> {
   final int time;
 
   @override
+  final int cooldown;
+
+  @override
   final List<Input<Resource>> input;
 
   @override
@@ -21,6 +24,7 @@ class ProductionFacility extends IOFacility<Resource, Product> {
     required this.time,
     required this.input,
     required this.output,
+    required this.cooldown,
   });
 
   @override

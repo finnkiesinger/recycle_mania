@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:recycle_mania/models/util/game_state.dart';
+
+import '../util/smooth_rectangle_border.dart';
 
 class BalanceView extends StatefulWidget {
   const BalanceView({super.key});
@@ -11,19 +15,21 @@ class BalanceView extends StatefulWidget {
 var baseColor = Colors.blue;
 
 class _BalanceViewState extends State<BalanceView> {
-  double get _balance => 0;
-
   @override
   Widget build(BuildContext context) {
+    var balance = context.watch<GameState>().money;
     return Stack(
       alignment: Alignment.centerLeft,
       children: [
         Container(
           height: 40,
           width: 150,
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
             color: baseColor.withOpacity(0.8),
-            borderRadius: BorderRadius.circular(14),
+            shape: SmoothRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+              smoothness: 1.0,
+            ),
           ),
           child: Row(
             children: [
@@ -33,7 +39,7 @@ class _BalanceViewState extends State<BalanceView> {
                 NumberFormat.compactCurrency(
                   symbol: "\$",
                   decimalDigits: 0,
-                ).format(_balance),
+                ).format(balance),
                 style: const TextStyle(
                   height: 1,
                   color: Colors.white,
@@ -49,9 +55,12 @@ class _BalanceViewState extends State<BalanceView> {
         Container(
           width: 48,
           height: 48,
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
             color: baseColor,
-            borderRadius: BorderRadius.circular(16),
+            shape: SmoothRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              smoothness: 1.0,
+            ),
           ),
           child: const Icon(
             Icons.savings_rounded,

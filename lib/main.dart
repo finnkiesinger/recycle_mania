@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:recycle_mania/data/resources.dart';
+import 'package:recycle_mania/data/wastes.dart';
+import 'package:recycle_mania/models/facility/processing_facility.dart';
+import 'package:recycle_mania/models/facility/storage_facility.dart';
+import 'package:recycle_mania/models/util/game_state.dart';
+import 'package:recycle_mania/models/util/output.dart';
+import 'package:recycle_mania/views/game_view.dart';
+import 'data/facilities.dart';
+import 'models/util/input.dart';
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(const RecycleMania());
+  runApp(RecycleMania());
 }
 
 const defaultTextStyle = TextStyle(
@@ -12,7 +21,21 @@ const defaultTextStyle = TextStyle(
 );
 
 class RecycleMania extends StatelessWidget {
-  const RecycleMania({super.key});
+  RecycleMania({super.key});
+
+  final _game = GameState(
+    facilities: [
+      StorageFacility(
+        name: "Metal Storage",
+        capacity: 100,
+        cost: 100,
+        item: metal,
+      ),
+      oldComputersProcessingFacility,
+    ],
+    storage: {},
+    money: 50000000000,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +50,9 @@ class RecycleMania extends StatelessWidget {
               bodyMedium: defaultTextStyle,
             ),
       ),
-      home: const HomeScreen(),
+      home: GameView(
+        state: _game,
+      ),
     );
   }
 }

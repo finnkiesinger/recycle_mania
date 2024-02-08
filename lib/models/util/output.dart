@@ -1,8 +1,7 @@
 import '../item/item.dart';
 
-class Output<T extends Item> {
-  final T item;
-  final int time;
+import 'io.dart';
 
-  const Output({required this.time, required this.item});
+class Output<T extends Item> extends IO<T> {
+  const Output({required super.amount, required super.item});
 }

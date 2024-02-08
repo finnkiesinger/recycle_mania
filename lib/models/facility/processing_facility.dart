@@ -9,6 +9,9 @@ class ProcessingFacility extends IOFacility<Waste, Resource> {
   final int time;
 
   @override
+  final int cooldown;
+
+  @override
   final List<Input<Waste>> input;
 
   @override
@@ -20,6 +23,7 @@ class ProcessingFacility extends IOFacility<Waste, Resource> {
     required this.input,
     required this.output,
     required this.time,
+    required this.cooldown,
   });
 
   @override

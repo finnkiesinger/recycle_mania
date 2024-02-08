@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../util/smooth_rectangle_border.dart';
+
 class BalanceChangeView extends StatefulWidget {
   const BalanceChangeView({super.key});
 
@@ -23,9 +25,12 @@ class _BalanceChangeViewState extends State<BalanceChangeView> {
         Container(
           height: 40,
           width: 150,
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
             color: getColor(_roc)?.withOpacity(0.6),
-            borderRadius: BorderRadius.circular(14),
+            shape: SmoothRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+              smoothness: 1.0,
+            ),
           ),
           child: Row(
             children: [
@@ -51,9 +56,12 @@ class _BalanceChangeViewState extends State<BalanceChangeView> {
         Container(
           width: 48,
           height: 48,
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
             color: getColor(_roc),
-            borderRadius: BorderRadius.circular(16),
+            shape: SmoothRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              smoothness: 1.0,
+            ),
           ),
           child: const Icon(
             Icons.currency_exchange_rounded,

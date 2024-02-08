@@ -1,36 +1,73 @@
 import 'package:flutter/material.dart';
 
+import '../models/util/rm_icon.dart';
 import '../models/item/resource.dart';
 
-const plastic = Resource(
-  name: "Plastic",
-  icon: Icons.recycling_rounded,
-  color: Color(0xFFFF3D5A),
-);
+class Plastic extends Resource {
+  const Plastic()
+      : super(
+          color: const Color(0xFFFF3D5A),
+          name: "Plastic",
+          icon: const RMIcon(
+            icon: Icons.recycling_rounded,
+          ),
+          price: 100,
+        );
+}
 
-const paper = Resource(
-  name: "Paper",
-  icon: Icons.note_rounded,
-  color: Colors.deepOrangeAccent,
-);
+class Paper extends Resource {
+  const Paper()
+      : super(
+          color: Colors.deepOrangeAccent,
+          name: "Paper",
+          icon: const RMIcon(
+            icon: Icons.note_rounded,
+          ),
+          price: 1,
+        );
+}
 
-const organic = Resource(
-  name: "Organic",
-  icon: Icons.compost_rounded,
-  color: Colors.lightGreen,
-);
+class Organic extends Resource {
+  const Organic()
+      : super(
+          name: "Organic",
+          icon: const RMIcon(
+            icon: Icons.compost_rounded,
+          ),
+          color: Colors.lightGreen,
+          price: 4,
+        );
+}
 
-const metal = Resource(
-  name: "Metal",
-  icon: Icons.table_rows_rounded,
-  color: Colors.blueGrey,
-);
+class Metal extends Resource {
+  const Metal()
+      : super(
+          name: "Metal",
+          icon: const RMIcon(
+            icon: Icons.table_rows_rounded,
+          ),
+          color: Colors.blueGrey,
+          price: 50,
+        );
+}
 
-const glass = Resource(
-  name: "Glass",
-  icon: Icons.liquor_rounded,
-  color: Colors.cyan,
-);
+class Glass extends Resource {
+  const Glass()
+      : super(
+          name: "Glass",
+          icon: const RMIcon(
+            icon: Icons.liquor_rounded,
+          ),
+          color: Colors.cyan,
+          price: 22,
+        );
+}
+
+const plastic = Plastic();
+const paper = Paper();
+const organic = Organic();
+const metal = Metal();
+const glass = Glass();
 
 const resources = [
   paper,

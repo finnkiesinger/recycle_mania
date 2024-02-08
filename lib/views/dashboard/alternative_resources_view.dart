@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:recycle_mania/data/resources.dart';
-import 'package:recycle_mania/views/linear_progress_view.dart';
-import 'package:recycle_mania/views/resource_name_view.dart';
+import 'package:recycle_mania/views/util/linear_progress_view.dart';
+import 'package:recycle_mania/views/dashboard/resource_name_view.dart';
 
 class AlternativeResourcesView extends StatefulWidget {
   const AlternativeResourcesView({super.key});
@@ -94,18 +94,20 @@ class _AlternativeResourcesViewState extends State<AlternativeResourcesView> {
                                   }
                                 },
                                 child: AnimatedContainer(
-                                  duration: const Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 150),
                                   width: _active == index ? 60 : 50,
                                   height: _active == index ? 60 : 50,
                                   decoration: BoxDecoration(
-                                    color: resource.color,
+                                    color: index == _active
+                                        ? resource.color
+                                        : resource.color.withOpacity(0.5),
                                     shape: BoxShape.circle,
                                   ),
                                   child: AnimatedScale(
-                                    duration: const Duration(milliseconds: 200),
+                                    duration: const Duration(milliseconds: 150),
                                     scale: _active == index ? 1.3 : 1,
                                     child: Icon(
-                                      resource.icon,
+                                      resource.icon.icon,
                                       color: Colors.white,
                                     ),
                                   ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'smooth_rectangle_border.dart';
+
 class LinearProgressView extends StatelessWidget {
   final Widget leading;
   final Widget? trailing;
@@ -23,18 +25,24 @@ class LinearProgressView extends StatelessWidget {
           children: [
             Container(
               height: 40,
-              decoration: BoxDecoration(
+              decoration: ShapeDecoration(
                 color: color.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(12),
+                shape: SmoothRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  smoothness: 1.0,
+                ),
               ),
             ),
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 40,
               width: constraints.maxWidth * progress,
-              decoration: BoxDecoration(
+              decoration: ShapeDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(12),
+                shape: SmoothRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  smoothness: 1.0,
+                ),
               ),
             ),
             Padding(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recycle_mania/views/balance_view.dart';
+import 'package:recycle_mania/views/finance/balance_view.dart';
 
 import 'balance_change_view.dart';
 

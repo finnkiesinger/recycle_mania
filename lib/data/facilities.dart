@@ -1,11 +1,42 @@
-import 'package:recycle_mania/models/facility/processing_facility.dart';
+import '../models/util/input.dart';
+import 'resources.dart';
+import 'wastes.dart';
 
-var facilities = [
-  ProcessingFacility(
-    name: "Processor",
-    cost: 10,
-    input: [],
-    output: [],
-    time: 10,
-  ),
-];
+import '../models/facility/processing_facility.dart';
+import '../models/util/output.dart';
+
+class OldComputersProcessingFacility extends ProcessingFacility {
+  OldComputersProcessingFacility()
+      : super(
+          name: "Old Computers",
+          cost: 1000,
+          input: [
+            const Input(
+              item: oldComputer,
+              amount: 10,
+            ),
+            const Input(
+              item: oldComputer,
+              amount: 10,
+            ),
+            const Input(
+              item: oldComputer,
+              amount: 10,
+            ),
+          ],
+          output: [
+            const Output(
+              item: plastic,
+              amount: 10,
+            ),
+            const Output(
+              item: metal,
+              amount: 1,
+            ),
+          ],
+          time: 2,
+          cooldown: 2,
+        );
+}
+
+final oldComputersProcessingFacility = OldComputersProcessingFacility();
