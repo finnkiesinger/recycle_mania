@@ -1,3 +1,5 @@
+import 'package:recycle_mania/models/util/game_state.dart';
+
 import 'io_facility.dart';
 import '../util/output.dart';
 import '../item/resource.dart';
@@ -27,11 +29,22 @@ class ProcessingFacility extends IOFacility<Waste, Resource> {
   });
 
   @override
-  void start() {}
+  void start() {
+    GameState.active.changeMoney(-inputCost);
+  }
+
+  int get inputCost {
+    var acc = 0;
+
+    for (var i in input) {
+      acc += i.amount * i.item.price;
+    }
+    return acc;
+  }
 
   @override
   void end() {}
 
   @override
-  bool get canStart => true;
+  bool get canStart => inputCost < GameState.active.money;
 }

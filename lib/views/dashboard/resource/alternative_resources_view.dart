@@ -3,7 +3,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:recycle_mania/data/resources.dart';
 import 'package:recycle_mania/views/util/linear_progress_view.dart';
-import 'package:recycle_mania/views/dashboard/resource_name_view.dart';
+import 'package:recycle_mania/views/dashboard/resource/resource_name_view.dart';
+
+import 'resource_view.dart';
 
 class AlternativeResourcesView extends StatefulWidget {
   const AlternativeResourcesView({super.key});
@@ -13,54 +15,23 @@ class AlternativeResourcesView extends StatefulWidget {
       _AlternativeResourcesViewState();
 }
 
-class _AlternativeResourcesViewState extends State<AlternativeResourcesView> {
+class _AlternativeResourcesViewState extends State<AlternativeResourcesView>
+    with AutomaticKeepAliveClientMixin {
   int _active = 0;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Stack(
         children: [
-          Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ResourceNameView(
-                    resource: resources[_active],
-                  ),
-                  const SizedBox(height: 24),
-                  const LinearProgressView(
-                    leading: Icon(
-                      Icons.warehouse_rounded,
-                      color: Colors.white,
-                    ),
-                    color: Colors.cyan,
-                    progress: 0.2,
-                  ),
-                  const SizedBox(height: 20),
-                  const LinearProgressView(
-                    leading: Icon(
-                      Icons.trending_up_rounded,
-                      color: Colors.black87,
-                    ),
-                    color: Colors.amber,
-                    progress: 1.0,
-                  ),
-                  const SizedBox(height: 12),
-                  const LinearProgressView(
-                    leading: Icon(
-                      Icons.trending_down_rounded,
-                      color: Colors.white,
-                    ),
-                    color: Colors.deepOrange,
-                    progress: 0.5,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 48),
-            ],
+          ResourceView(
+            resource: resources[_active],
           ),
           Padding(
             padding: EdgeInsets.only(

@@ -18,21 +18,43 @@ class GameView extends StatefulWidget {
   State<GameView> createState() => _GameViewState();
 }
 
-class _GameViewState extends State<GameView> {
+class _GameViewState extends State<GameView> with WidgetsBindingObserver {
   late Timer _timer;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      widget.state.update();
+      if (widget.state.speedSetting != SpeedSetting.paused) {
+        widget.state.update();
+      }
     });
   }
 
   @override
   void dispose() {
     _timer.cancel();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  SpeedSetting? _prevSetting;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        if (_prevSetting != SpeedSetting.paused) {
+          widget.state.changeSpeed(SpeedSetting.normal);
+        }
+        _prevSetting = null;
+        break;
+      default:
+        _prevSetting ??= widget.state.speedSetting;
+        widget.state.changeSpeed(SpeedSetting.paused);
+    }
   }
 
   @override

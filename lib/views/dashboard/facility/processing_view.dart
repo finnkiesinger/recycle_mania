@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'facility/facility_list_item.dart';
-import '../../models/facility/processing_facility.dart';
-import '../../models/util/game_state.dart';
+import 'facility_list_item.dart';
+import '../../../models/facility/processing_facility.dart';
+import '../../../models/util/game_state.dart';
 
 const processViewNodeHeight = 72.0;
 
@@ -43,7 +43,7 @@ class _ProcessingViewState extends State<ProcessingView> {
             ),
             itemBuilder: (context, index) {
               var processor = processors[index];
-              
+
               return FacilityListItem(facility: processor);
             },
             separatorBuilder: (context, index) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:recycle_mania/models/util/game_state.dart';
 
 import '../util/smooth_rectangle_border.dart';
 
@@ -15,10 +17,9 @@ Color? getColor(double roc, {double base = 1000}) {
 }
 
 class _BalanceChangeViewState extends State<BalanceChangeView> {
-  double get _roc => 500;
-
   @override
   Widget build(BuildContext context) {
+    var roc = context.watch<GameState>().activeCost;
     return Stack(
       alignment: Alignment.centerRight,
       children: [
@@ -26,7 +27,7 @@ class _BalanceChangeViewState extends State<BalanceChangeView> {
           height: 40,
           width: 150,
           decoration: ShapeDecoration(
-            color: getColor(_roc)?.withOpacity(0.6),
+            color: getColor(roc)?.withOpacity(0.6),
             shape: SmoothRectangleBorder(
               borderRadius: BorderRadius.circular(14),
               smoothness: 1.0,
@@ -40,7 +41,7 @@ class _BalanceChangeViewState extends State<BalanceChangeView> {
                 NumberFormat.compactCurrency(
                   symbol: "\$",
                   decimalDigits: 0,
-                ).format(_roc),
+                ).format(roc),
                 style: const TextStyle(
                   height: 1,
                   color: Colors.white,
@@ -57,7 +58,7 @@ class _BalanceChangeViewState extends State<BalanceChangeView> {
           width: 48,
           height: 48,
           decoration: ShapeDecoration(
-            color: getColor(_roc),
+            color: getColor(roc),
             shape: SmoothRectangleBorder(
               borderRadius: BorderRadius.circular(16),
               smoothness: 1.0,

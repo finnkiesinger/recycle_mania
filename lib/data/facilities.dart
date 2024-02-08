@@ -9,19 +9,11 @@ class OldComputersProcessingFacility extends ProcessingFacility {
   OldComputersProcessingFacility()
       : super(
           name: "Old Computers",
-          cost: 1000,
+          cost: 1,
           input: [
             const Input(
               item: oldComputer,
-              amount: 10,
-            ),
-            const Input(
-              item: oldComputer,
-              amount: 10,
-            ),
-            const Input(
-              item: oldComputer,
-              amount: 10,
+              amount: 1,
             ),
           ],
           output: [

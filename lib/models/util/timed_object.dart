@@ -1,13 +1,17 @@
 abstract mixin class TimedObject {
   abstract final int time;
   abstract final int cooldown;
+
   int _accumulator = 0;
   bool _active = false;
   bool _coolingDown = false;
+  bool _paused = false;
 
   TimedObject();
 
   void step() {
+    if (_paused) return;
+    
     if (_active || _coolingDown) {
       _accumulator++;
       if (_active) {
@@ -35,11 +39,17 @@ abstract mixin class TimedObject {
 
   void start();
 
+  void togglePause() {
+    _paused = !_paused;
+  }
+
   bool get canStart;
 
   bool get coolingDown => _coolingDown;
 
   bool get active => _active;
+
+  bool get paused => _paused;
 
   double get progress {
     if (_active) {

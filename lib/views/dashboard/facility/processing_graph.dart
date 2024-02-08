@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/util/io.dart';
-import '../processing_view.dart';
+import 'processing_view.dart';
 
 class ProcessingGraph extends StatelessWidget {
   final List<IO> input;

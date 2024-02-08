@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:recycle_mania/views/dashboard/facility/progress_view.dart';
 import '../../../models/facility/io_facility.dart';
-import '../processing_view.dart';
+import 'processing_view.dart';
 import 'item_column.dart';
 import 'pipeline_header.dart';
 import 'processing_graph.dart';

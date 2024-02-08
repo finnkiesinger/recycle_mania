@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:recycle_mania/views/dashboard/dashboard_tab.dart';
 
-import 'alternative_resources_view.dart';
+import 'resource/alternative_resources_view.dart';
 import 'dashboard_tab_view.dart';
-import 'processing_view.dart';
-import 'production_view.dart';
+import 'facility/processing_view.dart';
+import 'facility/production_view.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

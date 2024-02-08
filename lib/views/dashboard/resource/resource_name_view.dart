@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recycle_mania/models/item/resource.dart';
 
-import '../util/smooth_rectangle_border.dart';
+import '../../util/smooth_rectangle_border.dart';
 
 class ResourceNameView extends StatelessWidget {
   final Resource resource;
