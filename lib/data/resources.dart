@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 
-import '../models/resource.dart';
+import '../models/item/resource.dart';
 
 const plastic = Resource(
-  title: "Plastic",
+  name: "Plastic",
   icon: Icons.recycling_rounded,
-  color: Colors.blueGrey,
+  color: Color(0xFFFF3D5A),
 );
 
 const paper = Resource(
-  title: "Paper",
+  name: "Paper",
   icon: Icons.note_rounded,
   color: Colors.deepOrangeAccent,
 );
 
 const organic = Resource(
-  title: "Organic",
+  name: "Organic",
   icon: Icons.compost_rounded,
   color: Colors.lightGreen,
 );
 
 const metal = Resource(
-  title: "Metal",
+  name: "Metal",
   icon: Icons.table_rows_rounded,
-  color: Colors.grey,
+  color: Colors.blueGrey,
 );
 
 const glass = Resource(
-  title: "Glass",
+  name: "Glass",
   icon: Icons.liquor_rounded,
   color: Colors.cyan,
 );

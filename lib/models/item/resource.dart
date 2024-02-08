@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:recycle_mania/models/item/item.dart';
 
-class Resource {
+class Resource extends Item {
   final IconData icon;
-  final String title;
   final Color color;
 
   const Resource({
-    required this.title,
+    required super.name,
     required this.icon,
     this.color = Colors.white,
   });

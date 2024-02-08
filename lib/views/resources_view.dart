@@ -42,7 +42,7 @@ class _ResourcesViewState extends State<ResourcesView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      resource.title,
+                      resource.name,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,

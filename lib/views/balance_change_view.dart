@@ -39,7 +39,7 @@ class _BalanceChangeViewState extends State<BalanceChangeView> {
                 style: const TextStyle(
                   height: 1,
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.w700,
                 ),
               ),

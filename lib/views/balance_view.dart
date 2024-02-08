@@ -11,7 +11,7 @@ class BalanceView extends StatefulWidget {
 var baseColor = Colors.blue;
 
 class _BalanceViewState extends State<BalanceView> {
-  double get _balance => 50000;
+  double get _balance => 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +32,12 @@ class _BalanceViewState extends State<BalanceView> {
               Text(
                 NumberFormat.compactCurrency(
                   symbol: "\$",
+                  decimalDigits: 0,
                 ).format(_balance),
                 style: const TextStyle(
                   height: 1,
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.w700,
                 ),
               ),

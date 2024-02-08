@@ -28,7 +28,8 @@ class LinearProgressView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            Container(
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               height: 40,
               width: constraints.maxWidth * progress,
               decoration: BoxDecoration(
