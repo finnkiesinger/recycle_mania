@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../models/item/item.dart';
 import '../../../models/item/resource.dart';
-import '../../../models/item/waste.dart';
 import '../../../models/util/io.dart';
 import 'processing_view.dart';
 

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:recycle_mania/models/util/game_state.dart';
 
@@ -53,18 +54,16 @@ class _ResourceViewState extends State<ResourceView> {
             Icons.trending_up_rounded,
             color: Colors.black87,
           ),
-          trailing: Text(
-            "${productionRate.toStringAsFixed(2)} per second",
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              shadows: [
-                Shadow(
-                  color: Colors.black87,
-                  blurRadius: 12,
-                ),
-              ],
-            ),
-          ),
+          trailing: consumptionRate > 0.0
+              ? Text(
+                  NumberFormat.percentPattern()
+                      .format(productionRate / consumptionRate),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900,
+                  ),
+                )
+              : null,
           color: const Color(0xFFffa100),
           progress: productionRate / maxRate,
         ),
@@ -74,18 +73,21 @@ class _ResourceViewState extends State<ResourceView> {
             Icons.trending_down_rounded,
             color: Colors.white,
           ),
-          trailing: Text(
-            "${consumptionRate.toStringAsFixed(2)} per second",
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              shadows: [
-                Shadow(
-                  color: Colors.black87,
-                  blurRadius: 12,
-                ),
-              ],
-            ),
-          ),
+          trailing: productionRate > 0.0
+              ? Text(
+                  NumberFormat.percentPattern()
+                      .format(consumptionRate / productionRate),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black87,
+                        blurRadius: 12,
+                      ),
+                    ],
+                  ),
+                )
+              : null,
           color: Colors.deepOrange,
           progress: consumptionRate / maxRate,
         ),

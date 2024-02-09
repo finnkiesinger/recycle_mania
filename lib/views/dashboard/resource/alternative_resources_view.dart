@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:recycle_mania/data/resources.dart';
-import 'package:recycle_mania/views/util/linear_progress_view.dart';
-import 'package:recycle_mania/views/dashboard/resource/resource_name_view.dart';
 
 import 'resource_view.dart';
 

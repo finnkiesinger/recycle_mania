@@ -10,7 +10,7 @@ class ProductionView extends StatefulWidget {
 class _ProductionViewState extends State<ProductionView> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return const Stack(
       children: [
         Text("Production View"),
       ],

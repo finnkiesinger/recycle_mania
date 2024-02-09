@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -48,7 +47,7 @@ class _ProgressViewState extends State<ProgressView> {
             radius: 18,
             animation: true,
             animateFromLastPercent: true,
-            animationDuration: 500,
+            animationDuration: 1000,
             lineWidth: 3,
             circularStrokeCap: CircularStrokeCap.round,
             backgroundColor: Colors.white24,
