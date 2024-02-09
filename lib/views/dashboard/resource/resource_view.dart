@@ -22,9 +22,24 @@ class ResourceView extends StatefulWidget {
 }
 
 class _ResourceViewState extends State<ResourceView> {
-  @override
-  Widget build(BuildContext context) {
-    var game = context.watch<GameState>();
+  Widget _buildStorageView(GameState game) {
+    var stored = game.storage[widget.resource] ?? 0;
+    var capacity = game.totalCapacity(widget.resource);
+
+    var fillPercentage = stored / max(capacity, 1);
+
+    return LinearProgressView(
+      leading: const Icon(
+        Icons.warehouse_rounded,
+        color: Colors.white,
+      ),
+      trailing: Text("$stored / $capacity"),
+      color: Colors.cyan,
+      progress: fillPercentage,
+    );
+  }
+
+  List<Widget> _buildProductionView(GameState game) {
     var productionRate = game.productionRate(widget.resource);
     var consumptionRate = game.consumptionRate(widget.resource);
 
@@ -33,6 +48,56 @@ class _ResourceViewState extends State<ResourceView> {
       0.0000001,
     );
 
+    return [
+      LinearProgressView(
+        leading: const Icon(
+          Icons.trending_up_rounded,
+          color: Colors.black87,
+        ),
+        trailing: consumptionRate > 0.0
+            ? Text(
+                NumberFormat.percentPattern()
+                    .format(productionRate / consumptionRate),
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w900,
+                ),
+              )
+            : null,
+        color: const Color(0xFFffa100),
+        progress: productionRate / maxRate,
+      ),
+      const SizedBox(height: 12),
+      LinearProgressView(
+        leading: const Icon(
+          Icons.trending_down_rounded,
+          color: Colors.white,
+        ),
+        trailing: productionRate > 0.0
+            ? Text(
+                NumberFormat.percentPattern()
+                    .format(consumptionRate / productionRate),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      color: Colors.black87,
+                      blurRadius: 12,
+                    ),
+                  ],
+                ),
+              )
+            : null,
+        color: Colors.deepOrange,
+        progress: consumptionRate / maxRate,
+      ),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var game = context.watch<GameState>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,57 +105,9 @@ class _ResourceViewState extends State<ResourceView> {
           resource: widget.resource,
         ),
         const SizedBox(height: 24),
-        const LinearProgressView(
-          leading: Icon(
-            Icons.warehouse_rounded,
-            color: Colors.white,
-          ),
-          color: Colors.cyan,
-          progress: 0.2,
-        ),
+        _buildStorageView(game),
         const SizedBox(height: 20),
-        LinearProgressView(
-          leading: const Icon(
-            Icons.trending_up_rounded,
-            color: Colors.black87,
-          ),
-          trailing: consumptionRate > 0.0
-              ? Text(
-                  NumberFormat.percentPattern()
-                      .format(productionRate / consumptionRate),
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w900,
-                  ),
-                )
-              : null,
-          color: const Color(0xFFffa100),
-          progress: productionRate / maxRate,
-        ),
-        const SizedBox(height: 12),
-        LinearProgressView(
-          leading: const Icon(
-            Icons.trending_down_rounded,
-            color: Colors.white,
-          ),
-          trailing: productionRate > 0.0
-              ? Text(
-                  NumberFormat.percentPattern()
-                      .format(consumptionRate / productionRate),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black87,
-                        blurRadius: 12,
-                      ),
-                    ],
-                  ),
-                )
-              : null,
-          color: Colors.deepOrange,
-          progress: consumptionRate / maxRate,
-        ),
+        ..._buildProductionView(game),
       ],
     );
   }

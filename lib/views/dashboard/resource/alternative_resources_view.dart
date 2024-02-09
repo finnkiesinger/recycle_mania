@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:recycle_mania/data/resources.dart';
+import 'package:recycle_mania/views/util/smooth_rectangle_border.dart';
 
 import 'resource_view.dart';
 
@@ -43,9 +44,12 @@ class _AlternativeResourcesViewState extends State<AlternativeResourcesView>
                   Container(
                     height: 80,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
+                    decoration: ShapeDecoration(
                       color: Colors.white10,
-                      borderRadius: BorderRadius.circular(40),
+                      shape: SmoothRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        smoothness: 0.8,
+                      ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -66,11 +70,14 @@ class _AlternativeResourcesViewState extends State<AlternativeResourcesView>
                                   duration: const Duration(milliseconds: 150),
                                   width: _active == index ? 60 : 50,
                                   height: _active == index ? 60 : 50,
-                                  decoration: BoxDecoration(
+                                  decoration: ShapeDecoration(
                                     color: index == _active
                                         ? resource.color
                                         : resource.color.withOpacity(0.5),
-                                    shape: BoxShape.circle,
+                                    shape: SmoothRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      smoothness: 0.8,
+                                    ),
                                   ),
                                   child: AnimatedScale(
                                     duration: const Duration(milliseconds: 150),

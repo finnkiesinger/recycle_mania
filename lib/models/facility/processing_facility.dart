@@ -43,7 +43,23 @@ class ProcessingFacility extends IOFacility<Waste, Resource> {
   }
 
   @override
-  void end() {}
+  void end() {
+    for (var o in output) {
+      int storedAmount = GameState.active.storage[o.item] ?? 0;
+      int capacity = GameState.active.totalCapacity(o.item);
+      int available = capacity - storedAmount;
+
+      if (o.amount < available) {
+        GameState.active.changeStorage(o.item, o.amount);
+        continue;
+      }
+
+      GameState.active.changeStorage(o.item, available);
+
+      int sellAmount = o.amount - available;
+      GameState.active.changeMoney(sellAmount * o.item.price);
+    }
+  }
 
   @override
   bool get canStart => inputCost < GameState.active.money;

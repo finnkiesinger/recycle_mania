@@ -1,7 +1,8 @@
+import '../models/facility/production_facility.dart';
 import '../models/util/input.dart';
+import 'products.dart';
 import 'resources.dart';
 import 'wastes.dart';
-
 import '../models/facility/processing_facility.dart';
 import '../models/util/output.dart';
 
@@ -18,17 +19,48 @@ class OldComputersProcessingFacility extends ProcessingFacility {
           ],
           output: [
             const Output(
-              item: plastic,
-              amount: 10,
+              item: Resources.plastic,
+              amount: 4,
             ),
             const Output(
-              item: metal,
-              amount: 1,
+              item: Resources.metal,
+              amount: 2,
             ),
           ],
-          time: 10,
-          cooldown: 5,
+          time: 1,
+          cooldown: 1,
         );
 }
 
-final oldComputersProcessingFacility = OldComputersProcessingFacility();
+class ComputerProductionFacility extends ProductionFacility {
+  ComputerProductionFacility()
+      : super(
+          name: "Computers",
+          cost: 1,
+          input: [
+            const Input(
+              item: Resources.metal,
+              amount: 1,
+            ),
+            const Input(
+              item: Resources.plastic,
+              amount: 2,
+            ),
+          ],
+          output: [
+            const Output(
+              item: Computer(),
+              amount: 1,
+            ),
+          ],
+          time: 1,
+          cooldown: 1,
+        );
+}
+
+class Facilities {
+  static final oldComputersProcessingFacility =
+      OldComputersProcessingFacility();
+
+  static final computersProductionFacility = ComputerProductionFacility();
+}

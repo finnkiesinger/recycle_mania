@@ -63,16 +63,24 @@ class Glass extends Resource {
         );
 }
 
-const plastic = Plastic();
-const paper = Paper();
-const organic = Organic();
-const metal = Metal();
-const glass = Glass();
+const _plastic = Plastic();
+const _paper = Paper();
+const _organic = Organic();
+const _metal = Metal();
+const _glass = Glass();
 
 const resources = [
-  paper,
-  organic,
-  glass,
-  metal,
-  plastic,
+  _paper,
+  _organic,
+  _glass,
+  _metal,
+  _plastic,
 ];
+
+class Resources {
+  static const plastic = _plastic;
+  static const paper = _paper;
+  static const glass = _glass;
+  static const metal = _metal;
+  static const organic = _organic;
+}

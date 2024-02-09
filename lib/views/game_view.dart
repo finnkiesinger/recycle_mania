@@ -25,7 +25,7 @@ class _GameViewState extends State<GameView> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       if (widget.state.speedSetting != SpeedSetting.paused) {
         widget.state.update();
       }

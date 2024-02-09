@@ -22,9 +22,16 @@ class GameState with ChangeNotifier {
           name: "Metal Storage",
           capacity: 100,
           cost: 1,
-          item: metal,
+          item: Resources.metal,
         ),
-        oldComputersProcessingFacility,
+        StorageFacility(
+          name: "Plastic Storage",
+          capacity: 100,
+          cost: 1,
+          item: Resources.plastic,
+        ),
+        Facilities.oldComputersProcessingFacility,
+        Facilities.computersProductionFacility,
       ],
       storage: {},
       money: 50000,
@@ -59,7 +66,6 @@ class GameState with ChangeNotifier {
     }
 
     _changeMoney(-runningCost);
-    notifyListeners();
   }
 
   void _changeMoney(int amount) {
@@ -109,6 +115,11 @@ class GameState with ChangeNotifier {
     notifyListeners();
   }
 
+  void changeStorage(Item item, int amount) {
+    storage[item] = (storage[item] ?? 0) + amount;
+    notifyListeners();
+  }
+
   double get activeCost {
     var cost = 0.0;
     var profit = 0.0;
@@ -122,15 +133,29 @@ class GameState with ChangeNotifier {
               (facility.time + facility.cooldown);
         }
       }
-      
+
       if (facility is ProductionFacility && !facility.paused) {
         for (var output in facility.output) {
-          cost += output.item.price *
+          profit += output.item.price *
               output.amount /
               (facility.time + facility.cooldown);
         }
       }
     }
     return profit - cost;
+  }
+
+  int totalCapacity(Resource resource) {
+    var capacity = 0;
+
+    for (var facility in facilities) {
+      if (facility is StorageFacility) {
+        if (facility.item == resource) {
+          capacity += facility.capacity;
+        }
+      }
+    }
+
+    return capacity;
   }
 }

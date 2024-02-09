@@ -1,5 +1,6 @@
 import 'package:recycle_mania/models/facility/io_facility.dart';
 
+import '../util/game_state.dart';
 import '../util/input.dart';
 import '../util/output.dart';
 import '../item/product.dart';
@@ -28,11 +29,35 @@ class ProductionFacility extends IOFacility<Resource, Product> {
   });
 
   @override
-  void start() {}
+  void start() {
+    for (var i in input) {
+      GameState.active.changeStorage(i.item, -i.amount);
+    }
+  }
 
   @override
-  void end() {}
+  void end() {
+    GameState.active.changeMoney(profit);
+  }
+
+  int get profit {
+    int profit = 0;
+
+    for (var o in output) {
+      profit += o.amount * o.item.price;
+    }
+
+    return profit;
+  }
 
   @override
-  bool get canStart => true;
+  bool get canStart {
+    for (var i in input) {
+      if ((GameState.active.storage[i.item] ?? 0) < i.amount) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
