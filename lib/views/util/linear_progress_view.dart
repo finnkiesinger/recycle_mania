@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'clip_s_rect.dart';
 import 'smooth_rectangle_border.dart';
 
 class LinearProgressView extends StatelessWidget {
@@ -20,10 +21,8 @@ class LinearProgressView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return ClipPath(
-          clipper: CustomClipperProgress(
-            borderRadius: 12,
-          ),
+        return ClipSRect(
+          radius: 12,
           child: Stack(
             alignment: Alignment.centerLeft,
             children: [
@@ -68,23 +67,4 @@ class LinearProgressView extends StatelessWidget {
       },
     );
   }
-}
-
-class CustomClipperProgress extends CustomClipper<Path> {
-  final double borderRadius;
-
-  CustomClipperProgress({required this.borderRadius});
-
-  @override
-  Path getClip(Size size) {
-    return const SmoothRectangleBorder().getPath(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(0, 0, size.width, size.height),
-        Radius.circular(borderRadius),
-      ),
-    );
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
 }

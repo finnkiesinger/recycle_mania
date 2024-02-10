@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../util/bottom_dock.dart';
 import '../../util/dock_element.dart';
+import '../../util/modal_stack.dart';
 import 'facility_list_item.dart';
 import '../../../models/facility/processing_facility.dart';
 import '../../../models/util/game_state.dart';
@@ -76,6 +77,9 @@ class _ProcessingViewState extends State<ProcessingView> {
                 DockElement(
                   onTap: () {
                     HapticFeedback.lightImpact();
+                    ModalStack.of(context).showSheet(
+                      const RMSheet(),
+                    );
                   },
                   icon: Icons.build_rounded,
                   gradient: const LinearGradient(
