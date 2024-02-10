@@ -27,8 +27,8 @@ class OldComputersProcessingFacility extends ProcessingFacility {
               amount: 2,
             ),
           ],
-          time: 1,
-          cooldown: 1,
+          time: 5,
+          cooldown: 5,
         );
 }
 
@@ -53,8 +53,8 @@ class ComputerProductionFacility extends ProductionFacility {
               amount: 1,
             ),
           ],
-          time: 1,
-          cooldown: 1,
+          time: 5,
+          cooldown: 5,
         );
 }
 

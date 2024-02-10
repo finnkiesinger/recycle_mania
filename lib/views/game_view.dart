@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +24,7 @@ class _GameViewState extends State<GameView> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
       if (widget.state.speedSetting != SpeedSetting.paused) {
         widget.state.update();
       }

@@ -1,4 +1,6 @@
-abstract class Facility {
+import '../crafting/craftable.dart';
+
+abstract class Facility with Craftable {
   final String name;
   final int cost;
 
