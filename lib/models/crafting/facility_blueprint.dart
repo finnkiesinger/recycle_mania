@@ -4,7 +4,7 @@ import 'blueprint.dart';
 class FacilityBlueprint extends Blueprint {
   const FacilityBlueprint({
     required Facility facility,
-    required super.requirement,
+    required super.requirements,
   }) : super(
           output: facility,
         );

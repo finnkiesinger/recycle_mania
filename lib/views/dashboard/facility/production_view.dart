@@ -21,42 +21,46 @@ class _ProductionViewState extends State<ProductionView> {
         .whereType<ProductionFacility>()
         .toList();
 
-    return ShaderMask(
-      shaderCallback: (Rect bounds) {
-        return const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.transparent, Colors.white],
-          stops: [0.8, 1.0],
-        ).createShader(bounds);
-      },
-      blendMode: BlendMode.dstOut,
-      child: ListView.separated(
-        padding: EdgeInsets.zero.copyWith(
-          bottom: 100,
-        ),
-        itemBuilder: (context, index) {
-          var producer = producers[index];
-
-          return FacilityListItem(facility: producer);
-        },
-        separatorBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Center(
-              child: Container(
-                height: 2,
-                width: 150,
-                decoration: BoxDecoration(
-                  color: Colors.white10,
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-              ),
+    return Stack(
+      children: [
+        ShaderMask(
+          shaderCallback: (Rect bounds) {
+            return const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.transparent, Colors.white],
+              stops: [0.8, 1.0],
+            ).createShader(bounds);
+          },
+          blendMode: BlendMode.dstOut,
+          child: ListView.separated(
+            padding: EdgeInsets.zero.copyWith(
+              bottom: 100,
             ),
-          );
-        },
-        itemCount: producers.length,
-      ),
+            itemBuilder: (context, index) {
+              var producer = producers[index];
+
+              return FacilityListItem(facility: producer);
+            },
+            separatorBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Center(
+                  child: Container(
+                    height: 2,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white10,
+                      borderRadius: BorderRadius.circular(2.0),
+                    ),
+                  ),
+                ),
+              );
+            },
+            itemCount: producers.length,
+          ),
+        ),
+      ],
     );
   }
 }
