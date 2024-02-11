@@ -30,8 +30,10 @@ class RecycleMania extends StatelessWidget {
               bodyMedium: defaultTextStyle,
             ),
       ),
-      home: GameView(
-        state: _game,
+      home: Scaffold(
+        body: GameView(
+          state: _game,
+        ),
       ),
     );
   }

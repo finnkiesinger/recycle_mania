@@ -14,15 +14,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return const ModalStack(
-      child: Scaffold(
-        body: Column(
-          children: [
-            FinanceView(),
-            Expanded(
-              child: Dashboard(),
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          FinanceView(),
+          Expanded(
+            child: Dashboard(),
+          ),
+        ],
       ),
     );
   }
