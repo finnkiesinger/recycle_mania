@@ -83,7 +83,7 @@ class _ProcessingViewState extends State<ProcessingView> {
                       RMSheet(
                         child: Column(
                           children: [
-                            Expanded(
+                            const Expanded(
                               child: Text("Hi there"),
                             ),
                             SafeArea(

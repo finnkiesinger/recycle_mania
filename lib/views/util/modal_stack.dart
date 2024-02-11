@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-
-import 'clip_s_rect.dart';
 
 class ModalStackProvider extends InheritedWidget {
   final Function(RMSheet sheet) _showSheetImpl;
@@ -158,7 +155,7 @@ class _RMSheetWrapperState extends State<_RMSheetWrapper>
           height: _maxHeight,
           child: ClipRRect(
             borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(32),
+              top: Radius.circular(16),
             ),
             child: widget.child,
           ),
