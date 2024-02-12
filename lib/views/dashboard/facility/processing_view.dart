@@ -5,11 +5,10 @@ import 'package:provider/provider.dart';
 import '../../util/bottom_dock.dart';
 import '../../util/dock_element.dart';
 import '../../util/modal_stack.dart';
-import '../../util/smooth_rectangle_border.dart';
-import '../../util/tap_scale.dart';
 import 'facility_list_item.dart';
 import '../../../models/facility/processing_facility.dart';
 import '../../../models/util/game_state.dart';
+import 'processing_blueprint_list.dart';
 
 const processViewNodeHeight = 72.0;
 
@@ -37,7 +36,7 @@ class _ProcessingViewState extends State<ProcessingView> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [Colors.transparent, Colors.white],
-              stops: [0.8, 1.0],
+              stops: [0.7, 1.0],
             ).createShader(bounds);
           },
           blendMode: BlendMode.dstOut,
@@ -80,51 +79,8 @@ class _ProcessingViewState extends State<ProcessingView> {
                   onTap: () {
                     HapticFeedback.lightImpact();
                     ModalStack.of(context).showSheet(
-                      RMSheet(
-                        child: Column(
-                          children: [
-                            const Expanded(
-                              child: Text("Hi there"),
-                            ),
-                            SafeArea(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: TapScale(
-                                  onTap: () {
-                                    ModalStack.of(context).pop();
-                                    HapticFeedback.lightImpact();
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 50,
-                                          decoration: ShapeDecoration(
-                                            shape: SmoothRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              smoothness: 1.0,
-                                            ),
-                                            color: const Color(0xFF3C3C3C),
-                                          ),
-                                          child: const Center(
-                                            child: Text(
-                                              "CLOSE",
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w900,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      const RMSheet(
+                        child: ProcessingBlueprintList(),
                       ),
                     );
                   },
