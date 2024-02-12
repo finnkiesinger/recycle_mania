@@ -19,17 +19,31 @@ class ProcessingBlueprintList extends StatefulWidget {
 class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
   @override
   Widget build(BuildContext context) {
-    var blueprints =
-        Blueprints.all.whereType<ProcessingFacilityBlueprint>().toList();
+    var blueprints = Blueprints.all.toList();
 
     return Stack(
       children: [
-        ListView.builder(
+        ListView.separated(
           padding: EdgeInsets.zero.copyWith(
             bottom: 86 + MediaQuery.of(context).viewPadding.bottom,
             top: 56,
           ),
           itemCount: blueprints.length,
+          separatorBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 48),
+              child: Center(
+                child: Container(
+                  height: 2,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.white10,
+                    borderRadius: BorderRadius.circular(2.0),
+                  ),
+                ),
+              ),
+            );
+          },
           itemBuilder: (context, index) {
             var bp = blueprints[index];
             return IOFacilityBlueprintListElement(
@@ -57,12 +71,14 @@ class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
                 ],
               ),
             ),
-            child: const Text(
-              "Blueprints",
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 24,
-                height: 1,
+            child: const Center(
+              child: Text(
+                "Blueprints",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 24,
+                  height: 1,
+                ),
               ),
             ),
           ),

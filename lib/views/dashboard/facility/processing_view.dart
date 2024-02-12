@@ -42,6 +42,7 @@ class _ProcessingViewState extends State<ProcessingView> {
           blendMode: BlendMode.dstOut,
           child: ListView.separated(
             padding: EdgeInsets.zero.copyWith(
+              top: 8,
               bottom: 100,
             ),
             itemBuilder: (context, index) {

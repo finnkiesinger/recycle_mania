@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../util/smooth_rectangle_border.dart';
+import 'graph_facility_indicator.dart';
 import 'progress_view.dart';
 import '../../../models/facility/io_facility.dart';
 import 'processing_view.dart';
@@ -30,30 +32,44 @@ class _FacilityListItemState extends State<FacilityListItem> {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 16.0),
-          child: Text(
-            widget.facility.name,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12.0,
+              vertical: 4,
+            ),
+            decoration: ShapeDecoration(
+              shape: SmoothRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                smoothness: 1,
+              ),
+              color: Colors.white10,
+            ),
+            child: Text(
+              widget.facility.name,
+              style: TextStyle(
+                fontSize: 20,
+                color: Theme.of(context).textTheme.bodyMedium?.color,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 16),
-        const Row(
-          children: [
-            SizedBox(width: 16),
-            PipelineHeader(
-              title: "Input",
-              color: Colors.cyan,
-            ),
-            Spacer(),
-            PipelineHeader(
-              title: "Output",
-              color: Colors.green,
-            ),
-            SizedBox(width: 16),
-          ],
-        ),
+        // const SizedBox(height: 16),
+        // const Row(
+        //   children: [
+        //     SizedBox(width: 16),
+        //     PipelineHeader(
+        //       title: "Input",
+        //       color: Colors.cyan,
+        //     ),
+        //     Spacer(),
+        //     PipelineHeader(
+        //       title: "Output",
+        //       color: Colors.green,
+        //     ),
+        //     SizedBox(width: 16),
+        //   ],
+        // ),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
@@ -91,7 +107,7 @@ class _FacilityListItemState extends State<FacilityListItem> {
                       ? ProgressView(
                           facility: widget.facility,
                         )
-                      : null,
+                      : const GraphFacilityIndicator(),
                 ),
               ],
             ),

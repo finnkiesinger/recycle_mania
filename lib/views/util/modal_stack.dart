@@ -94,8 +94,8 @@ class _ModalStackState extends State<ModalStack> {
       child: Stack(
         children: [
           widget.child,
-          IgnorePointer(
-            child: Positioned.fill(
+          Positioned.fill(
+            child: IgnorePointer(
               child: AnimatedOpacity(
                 duration: const Duration(milliseconds: 250),
                 opacity: !_empty ? 0.5 : 0,

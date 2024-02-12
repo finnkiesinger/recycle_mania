@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 
-import '../../../models/item/item.dart';
 import '../../../models/item/product.dart';
 import '../../../models/item/resource.dart';
 import '../../../models/util/io.dart';
+import '../../util/smooth_rectangle_border.dart';
 import 'processing_view.dart';
 
 class ItemColumn extends StatelessWidget {
@@ -14,7 +15,8 @@ class ItemColumn extends StatelessWidget {
     required this.io,
   });
 
-  Widget _buildNode(Item item) {
+  Widget _buildNode(IO io) {
+    final item = io.item;
     Color color = Colors.red;
     Widget? child;
 
@@ -36,12 +38,60 @@ class ItemColumn extends StatelessWidget {
       child = item.icon.widget;
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
+    return Tooltip(
+      message: "${item.name} x${io.amount}",
+      decoration: ShapeDecoration(
+        shape: SmoothRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          smoothness: 1.0,
+          side: const BorderSide(
+            color: Colors.white,
+            width: 2,
+          ),
+        ),
+        shadows: const [
+          BoxShadow(
+            color: Colors.black54,
+            blurRadius: 16,
+          ),
+        ],
         color: color,
       ),
-      child: child,
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+      triggerMode: TooltipTriggerMode.tap,
+      child: badges.Badge(
+        position: badges.BadgePosition.bottomEnd(),
+        showBadge: io.amount > 1,
+        badgeContent: Text(
+          "x${io.amount}",
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+        ),
+        badgeStyle: badges.BadgeStyle(
+          shape: badges.BadgeShape.square,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+          borderRadius: BorderRadius.circular(8),
+          badgeColor: color,
+          borderSide: const BorderSide(
+            color: Colors.white,
+            width: 2,
+          ),
+        ),
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color,
+          ),
+          child: child,
+        ),
+      ),
     );
   }
 
@@ -55,11 +105,7 @@ class ItemColumn extends StatelessWidget {
             height: processViewNodeHeight,
             width: 80,
             child: Center(
-              child: SizedBox(
-                height: 60,
-                width: 60,
-                child: _buildNode(io.item),
-              ),
+              child: _buildNode(io),
             ),
           ),
         ),

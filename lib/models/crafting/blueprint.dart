@@ -9,4 +9,10 @@ abstract class Blueprint {
     required this.output,
     required this.requirements,
   });
+
+  int get cost => requirements.isEmpty
+      ? 0
+      : requirements
+          .map((r) => r.item.price * r.amount)
+          .reduce((value, element) => value + element);
 }
