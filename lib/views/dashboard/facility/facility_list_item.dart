@@ -7,7 +7,6 @@ import 'progress_view.dart';
 import '../../../models/facility/io_facility.dart';
 import 'processing_view.dart';
 import 'item_column.dart';
-import 'pipeline_header.dart';
 import 'processing_graph.dart';
 
 class FacilityListItem extends StatefulWidget {
@@ -107,7 +106,9 @@ class _FacilityListItemState extends State<FacilityListItem> {
                       ? ProgressView(
                           facility: widget.facility,
                         )
-                      : const GraphFacilityIndicator(),
+                      : GraphFacilityIndicator(
+                          facility: widget.facility,
+                        ),
                 ),
               ],
             ),

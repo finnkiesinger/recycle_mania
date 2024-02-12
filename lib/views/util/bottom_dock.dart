@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-
 import 'smooth_rectangle_border.dart';
 
 class BottomDock extends StatelessWidget {
@@ -19,7 +18,7 @@ class BottomDock extends StatelessWidget {
           height: 80,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: ShapeDecoration(
-            color: Colors.white10,
+            color: const Color.fromARGB(255, 50, 50, 50),
             shape: SmoothRectangleBorder(
               borderRadius: BorderRadius.circular(30),
               smoothness: 0.8,

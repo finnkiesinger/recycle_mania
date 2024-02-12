@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ModalStackProvider extends InheritedWidget {
@@ -94,6 +96,7 @@ class _ModalStackState extends State<ModalStack> {
       child: Stack(
         children: [
           widget.child,
+          ..._stack.sublist(0, max(_stack.length - 1, 0)),
           Positioned.fill(
             child: IgnorePointer(
               child: AnimatedOpacity(
@@ -105,7 +108,7 @@ class _ModalStackState extends State<ModalStack> {
               ),
             ),
           ),
-          ..._stack,
+          if (_stack.isNotEmpty) _stack[_stack.length - 1],
         ],
       ),
     );

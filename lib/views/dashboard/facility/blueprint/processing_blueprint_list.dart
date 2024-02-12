@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../data/blueprints.dart';
-import '../../../../models/crafting/processing_facility_blueprint.dart';
-import '../../../util/modal_stack.dart';
 import '../../../util/smooth_rectangle_border.dart';
 import '../../../util/tap_scale.dart';
 import 'io_facility_blueprint_list_element.dart';
@@ -107,7 +105,7 @@ class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
             ),
             child: TapScale(
               onTap: () {
-                ModalStack.of(context).pop();
+                Navigator.of(context).pop();
                 HapticFeedback.lightImpact();
               },
               child: Row(
@@ -120,7 +118,7 @@ class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
                           borderRadius: BorderRadius.circular(16),
                           smoothness: 1.0,
                         ),
-                        color: const Color(0xFF3C3C3C),
+                        color: const Color.fromARGB(255, 50, 50, 50),
                       ),
                       child: const Center(
                         child: Text(

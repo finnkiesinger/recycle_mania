@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../../models/crafting/io_facility_blueprint.dart';
 import '../../../../models/facility/io_facility.dart';
 import '../../../util/smooth_rectangle_border.dart';
 import '../../../util/tap_scale.dart';
 import '../facility_list_item.dart';
+import 'io_facility_blueprint_details.dart';
 
 class IOFacilityBlueprintListElement extends StatelessWidget {
   final IOFacilityBlueprint blueprint;
@@ -24,7 +27,7 @@ class IOFacilityBlueprintListElement extends StatelessWidget {
           facility: facility,
           animating: false,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
@@ -34,7 +37,22 @@ class IOFacilityBlueprintListElement extends StatelessWidget {
                 icon: Icons.info_rounded,
                 text: "MORE",
                 color: Colors.white,
-                onTap: () {},
+                onTap: () {
+                  showCupertinoModalBottomSheet(
+                    context: context,
+                    enableDrag: false,
+                    isDismissible: false,
+                    barrierColor: Colors.black38,
+                    duration: const Duration(milliseconds: 250),
+                    builder: (context) {
+                      return Scaffold(
+                        body: IOFacilityBlueprintDetails(
+                          facility: facility,
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
               const SizedBox(width: 16),
               _ActionButton(
@@ -42,7 +60,8 @@ class IOFacilityBlueprintListElement extends StatelessWidget {
                   text: "BUILD",
                   color: const Color.fromARGB(255, 0, 163, 95),
                   onTap: () {},
-                  hint: "Cost: \$${blueprint.cost}"),
+                  hint:
+                      "Cost: \$${NumberFormat.decimalPattern(Localizations.localeOf(context).toString()).format(blueprint.cost)}"),
             ],
           ),
         ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import '../../util/bottom_dock.dart';
 import '../../util/dock_element.dart';
-import '../../util/modal_stack.dart';
 import 'facility_list_item.dart';
 import '../../../models/facility/processing_facility.dart';
 import '../../../models/util/game_state.dart';
@@ -79,10 +79,17 @@ class _ProcessingViewState extends State<ProcessingView> {
                 DockElement(
                   onTap: () {
                     HapticFeedback.lightImpact();
-                    ModalStack.of(context).showSheet(
-                      const RMSheet(
-                        child: ProcessingBlueprintList(),
-                      ),
+                    showCupertinoModalBottomSheet(
+                      context: context,
+                      isDismissible: false,
+                      enableDrag: false,
+                      barrierColor: Colors.black38,
+                      duration: const Duration(milliseconds: 250),
+                      builder: (context) {
+                        return const Scaffold(
+                          body: ProcessingBlueprintList(),
+                        );
+                      },
                     );
                   },
                   icon: Icons.build_rounded,

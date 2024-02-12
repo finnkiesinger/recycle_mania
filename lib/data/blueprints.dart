@@ -1,5 +1,7 @@
 import '../models/crafting/processing_facility_blueprint.dart';
 import '../models/crafting/production_facility_blueprint.dart';
+import '../models/util/input.dart';
+import 'crafting.dart';
 import 'facilities.dart';
 
 class OldComputerProcessingFacilityBlueprint
@@ -7,7 +9,12 @@ class OldComputerProcessingFacilityBlueprint
   OldComputerProcessingFacilityBlueprint()
       : super(
           facility: Facilities.oldComputersProcessingFacility,
-          requirements: [],
+          requirements: [
+            const Input(
+              item: CraftingItems.shredder,
+              amount: 1,
+            ),
+          ],
         );
 }
 
