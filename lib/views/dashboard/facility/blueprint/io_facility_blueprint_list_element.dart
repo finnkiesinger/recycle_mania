@@ -47,7 +47,7 @@ class IOFacilityBlueprintListElement extends StatelessWidget {
                     builder: (context) {
                       return Scaffold(
                         body: IOFacilityBlueprintDetails(
-                          facility: facility,
+                          blueprint: blueprint,
                         ),
                       );
                     },

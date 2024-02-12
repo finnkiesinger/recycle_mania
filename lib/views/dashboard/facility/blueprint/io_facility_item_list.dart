@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/item/product.dart';
 import '../../../../models/item/resource.dart';
 import '../../../../models/util/io.dart';
 import '../../../util/smooth_rectangle_border.dart';
@@ -23,6 +24,10 @@ class IOFacilityItemList extends StatelessWidget {
 
             if (item is Resource) {
               color = item.color;
+            }
+
+            if (item is Product) {
+              color = item.color ?? color;
             }
 
             return Container(

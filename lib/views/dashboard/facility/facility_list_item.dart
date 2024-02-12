@@ -12,11 +12,15 @@ import 'processing_graph.dart';
 class FacilityListItem extends StatefulWidget {
   final IOFacility facility;
   final bool animating;
+  final bool hideTitle;
+  final bool collapsed;
 
   const FacilityListItem({
     super.key,
     required this.facility,
     this.animating = true,
+    this.hideTitle = false,
+    this.collapsed = false,
   });
 
   @override
@@ -29,48 +33,35 @@ class _FacilityListItemState extends State<FacilityListItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
-              vertical: 4,
-            ),
-            decoration: ShapeDecoration(
-              shape: SmoothRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                smoothness: 1,
+        if (!widget.hideTitle)
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 4,
               ),
-              color: Colors.white10,
-            ),
-            child: Text(
-              widget.facility.name,
-              style: TextStyle(
-                fontSize: 20,
-                color: Theme.of(context).textTheme.bodyMedium?.color,
-                fontWeight: FontWeight.w600,
+              decoration: ShapeDecoration(
+                shape: SmoothRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  smoothness: 1,
+                ),
+                color: Colors.white10,
+              ),
+              child: Text(
+                widget.facility.name,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
-        ),
-        // const SizedBox(height: 16),
-        // const Row(
-        //   children: [
-        //     SizedBox(width: 16),
-        //     PipelineHeader(
-        //       title: "Input",
-        //       color: Colors.cyan,
-        //     ),
-        //     Spacer(),
-        //     PipelineHeader(
-        //       title: "Output",
-        //       color: Colors.green,
-        //     ),
-        //     SizedBox(width: 16),
-        //   ],
-        // ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: !widget.collapsed
+              ? const EdgeInsets.all(16.0)
+              : const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(
             height: max(widget.facility.input.length,
                     widget.facility.output.length) *

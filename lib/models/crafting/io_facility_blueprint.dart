@@ -5,5 +5,6 @@ class IOFacilityBlueprint extends FacilityBlueprint {
   const IOFacilityBlueprint({
     required IOFacility facility,
     required super.requirements,
+    super.description,
   }) : super(facility: facility);
 }

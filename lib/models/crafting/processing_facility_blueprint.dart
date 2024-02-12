@@ -5,5 +5,6 @@ class ProcessingFacilityBlueprint extends IOFacilityBlueprint {
   const ProcessingFacilityBlueprint({
     required ProcessingFacility facility,
     required super.requirements,
+    super.description,
   }) : super(facility: facility);
 }
