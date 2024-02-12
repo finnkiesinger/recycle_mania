@@ -1,4 +1,4 @@
-import 'package:recycle_mania/models/item/item.dart';
+import 'item.dart';
 
 class Waste extends Item {
   const Waste({

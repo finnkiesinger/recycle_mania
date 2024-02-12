@@ -1,8 +1,7 @@
-import 'package:recycle_mania/models/crafting/facility_blueprint.dart';
-
 import '../facility/production_facility.dart';
+import 'io_facility_blueprint.dart';
 
-class ProductionFacilityBlueprint extends FacilityBlueprint {
+class ProductionFacilityBlueprint extends IOFacilityBlueprint {
   const ProductionFacilityBlueprint({
     required ProductionFacility facility,
     required super.requirements,

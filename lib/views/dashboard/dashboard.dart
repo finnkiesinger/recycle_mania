@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recycle_mania/views/dashboard/dashboard_tab.dart';
+import 'dashboard_tab.dart';
 
 import 'resource/alternative_resources_view.dart';
 import 'dashboard_tab_view.dart';

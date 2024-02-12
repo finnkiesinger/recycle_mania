@@ -56,6 +56,7 @@ class ModalStack extends StatefulWidget {
 class _ModalStackState extends State<ModalStack> {
   final List<_RMSheetWrapper> _stack = [];
   final List<RMSheetController> _controller = [];
+  var _empty = true;
 
   void showSheet(RMSheet sheet) {
     setState(() {
@@ -66,11 +67,17 @@ class _ModalStackState extends State<ModalStack> {
           child: sheet,
         ),
       );
+      _empty = false;
       _controller.add(controller);
     });
   }
 
   void pop() {
+    if (_stack.length == 1) {
+      setState(() {
+        _empty = true;
+      });
+    }
     _controller[_controller.length - 1].progress(0, then: () {
       setState(() {
         _controller.removeAt(_controller.length - 1);
@@ -87,6 +94,17 @@ class _ModalStackState extends State<ModalStack> {
       child: Stack(
         children: [
           widget.child,
+          IgnorePointer(
+            child: Positioned.fill(
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 250),
+                opacity: !_empty ? 0.5 : 0,
+                child: Container(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
           ..._stack,
         ],
       ),

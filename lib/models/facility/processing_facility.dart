@@ -1,12 +1,11 @@
-import 'package:recycle_mania/models/util/game_state.dart';
-
+import '../util/game_state.dart';
 import 'io_facility.dart';
 import '../util/output.dart';
 import '../item/resource.dart';
 import '../util/input.dart';
 import '../item/waste.dart';
 
-class ProcessingFacility extends IOFacility<Waste, Resource> {
+abstract class ProcessingFacility extends IOFacility<Waste, Resource> {
   @override
   final int time;
 

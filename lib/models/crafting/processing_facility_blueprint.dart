@@ -1,7 +1,7 @@
-import 'facility_blueprint.dart';
 import '../facility/processing_facility.dart';
+import 'io_facility_blueprint.dart';
 
-class ProcessingFacilityBlueprint extends FacilityBlueprint {
+class ProcessingFacilityBlueprint extends IOFacilityBlueprint {
   const ProcessingFacilityBlueprint({
     required ProcessingFacility facility,
     required super.requirements,

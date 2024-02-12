@@ -1,4 +1,4 @@
-import 'package:recycle_mania/models/facility/io_facility.dart';
+import 'io_facility.dart';
 
 import '../util/game_state.dart';
 import '../util/input.dart';
@@ -6,7 +6,7 @@ import '../util/output.dart';
 import '../item/product.dart';
 import '../item/resource.dart';
 
-class ProductionFacility extends IOFacility<Resource, Product> {
+abstract class ProductionFacility extends IOFacility<Resource, Product> {
   @override
   final int time;
 

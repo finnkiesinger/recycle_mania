@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
-import 'package:recycle_mania/data/resources.dart';
-import 'package:recycle_mania/views/util/smooth_rectangle_border.dart';
+import '../../../data/resources.dart';
+import '../../util/smooth_rectangle_border.dart';
 
 import '../../util/bottom_dock.dart';
 import 'resource_view.dart';

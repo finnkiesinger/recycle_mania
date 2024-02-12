@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:recycle_mania/models/facility/io_facility.dart';
-import 'package:recycle_mania/models/util/game_state.dart';
+import '../../../models/facility/io_facility.dart';
+import '../../../models/util/game_state.dart';
 
 import '../../util/smooth_rectangle_border.dart';
 

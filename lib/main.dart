@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recycle_mania/models/util/game_state.dart';
-import 'package:recycle_mania/views/game_view.dart';
+import 'models/util/game_state.dart';
+import 'views/game_view.dart';
 
 void main() {
   runApp(RecycleMania());

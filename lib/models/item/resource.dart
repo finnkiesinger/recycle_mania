@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recycle_mania/models/item/item.dart';
+import 'item.dart';
 
 class Resource extends Item {
   final Color color;

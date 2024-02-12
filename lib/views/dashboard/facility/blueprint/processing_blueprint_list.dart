@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../data/blueprints.dart';
-import '../../../models/crafting/processing_facility_blueprint.dart';
-import '../../../models/facility/processing_facility.dart';
-import '../../util/modal_stack.dart';
-import '../../util/smooth_rectangle_border.dart';
-import '../../util/tap_scale.dart';
+import '../../../../data/blueprints.dart';
+import '../../../../models/crafting/processing_facility_blueprint.dart';
+import '../../../util/modal_stack.dart';
+import '../../../util/smooth_rectangle_border.dart';
+import '../../../util/tap_scale.dart';
+import 'io_facility_blueprint_list_element.dart';
 
 class ProcessingBlueprintList extends StatefulWidget {
   const ProcessingBlueprintList({super.key});
@@ -21,19 +21,20 @@ class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
   Widget build(BuildContext context) {
     var blueprints =
         Blueprints.all.whereType<ProcessingFacilityBlueprint>().toList();
+
     return Stack(
       children: [
         ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
+          padding: EdgeInsets.zero.copyWith(
             bottom: 86 + MediaQuery.of(context).viewPadding.bottom,
             top: 56,
           ),
           itemCount: blueprints.length,
           itemBuilder: (context, index) {
             var bp = blueprints[index];
-            var facility = bp.output as ProcessingFacility;
-
-            return Text(facility.name);
+            return IOFacilityBlueprintListElement(
+              blueprint: bp,
+            );
           },
         ),
         Positioned(

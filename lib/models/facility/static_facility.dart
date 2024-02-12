@@ -1,4 +1,4 @@
-import 'package:recycle_mania/models/facility/facility.dart';
+import 'facility.dart';
 
 abstract class StaticFacility extends Facility {
   StaticFacility({

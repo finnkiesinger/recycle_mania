@@ -1,4 +1,8 @@
+import '../models/facility/io_facility.dart';
 import '../models/facility/production_facility.dart';
+import '../models/item/product.dart';
+import '../models/item/resource.dart';
+import '../models/item/waste.dart';
 import '../models/util/input.dart';
 import 'products.dart';
 import 'resources.dart';
@@ -30,6 +34,11 @@ class OldComputersProcessingFacility extends ProcessingFacility {
           time: 5,
           cooldown: 5,
         );
+
+  @override
+  IOFacility<Waste, Resource> create() {
+    return OldComputersProcessingFacility();
+  }
 }
 
 class ComputerProductionFacility extends ProductionFacility {
@@ -56,6 +65,11 @@ class ComputerProductionFacility extends ProductionFacility {
           time: 5,
           cooldown: 5,
         );
+
+  @override
+  IOFacility<Resource, Product> create() {
+    return ComputerProductionFacility();
+  }
 }
 
 class Facilities {

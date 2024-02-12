@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:recycle_mania/models/util/game_state.dart';
+import '../../../models/util/game_state.dart';
 
 import '../../../models/item/resource.dart';
 import '../../util/linear_progress_view.dart';

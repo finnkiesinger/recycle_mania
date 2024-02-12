@@ -16,5 +16,5 @@ class Computer extends Product {
 }
 
 class Products {
-  static final computer = Computer();
+  static const computer = Computer();
 }
