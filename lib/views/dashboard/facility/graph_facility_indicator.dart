@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../models/facility/io_facility.dart';
+import '../../../models/facility/processing_facility.dart';
+import '../../../models/facility/production_facility.dart';
 import '../../util/smooth_rectangle_border.dart';
 
 class GraphFacilityIndicator extends StatelessWidget {
@@ -44,11 +47,20 @@ class GraphFacilityIndicator extends StatelessWidget {
             ),
             color: Colors.cyan,
           ),
-          child: const Center(
-            child: Icon(
-              Icons.chevron_right_rounded,
-              color: Colors.white,
-              size: 32,
+          child: Center(
+            child: Builder(
+              builder: (context) {
+                var cost = facility.cost * (facility.time + facility.cooldown);
+                if (facility is ProcessingFacility) {
+                  cost += (facility as ProcessingFacility).inputCost;
+                } else if (facility is ProductionFacility) {}
+                return Text(
+                  "\$${NumberFormat.compact().format(cost)}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
             ),
           ),
         ),

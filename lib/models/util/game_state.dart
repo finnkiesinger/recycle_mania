@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../crafting/blueprint.dart';
+import '../crafting/facility_blueprint.dart';
+import '../crafting/io_facility_blueprint.dart';
 import '../facility/processing_facility.dart';
 import '../facility/production_facility.dart';
 import '../item/resource.dart';
 import '../../data/facilities.dart';
-import '../../data/resources.dart';
 import '../facility/io_facility.dart';
 import '../facility/facility.dart';
 import '../facility/storage_facility.dart';
@@ -18,18 +20,8 @@ class GameState with ChangeNotifier {
   static GameState create() {
     var game = GameState(
       facilities: [
-        StorageFacility(
-          name: "Metal Storage",
-          capacity: 100,
-          cost: 1,
-          item: Resources.metal,
-        ),
-        StorageFacility(
-          name: "Plastic Storage",
-          capacity: 100,
-          cost: 1,
-          item: Resources.plastic,
-        ),
+        Facilities.metalStorageFacility.create(),
+        Facilities.plasticStorageFacility.create(),
         Facilities.oldComputersProcessingFacility.create(),
         Facilities.computersProductionFacility.create(),
       ],
@@ -79,6 +71,19 @@ class GameState with ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  void buildFacility(FacilityBlueprint blueprint) {
+    if (blueprint is IOFacilityBlueprint) {
+      var facility = (blueprint.output as IOFacility).create();
+      facilities.add(facility);
+    }
+
+    changeMoney(-blueprint.cost);
+  }
+
+  bool fulfillsRequirementsFor(Blueprint blueprint) {
+    return money > blueprint.cost;
   }
 
   double productionRate(Resource resource) {

@@ -4,8 +4,10 @@ abstract class Facility with Craftable {
   final String name;
   final int cost;
 
-  Facility({
+  const Facility({
     required this.name,
     required this.cost,
   });
+
+  Facility create();
 }

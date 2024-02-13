@@ -14,6 +14,4 @@ abstract class IOFacility<I extends Item, O extends Item> extends Facility
     required super.name,
     required super.cost,
   });
-
-  IOFacility create();
 }

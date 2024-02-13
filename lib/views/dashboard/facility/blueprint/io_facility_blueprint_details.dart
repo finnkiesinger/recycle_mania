@@ -1,17 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../models/crafting/io_facility_blueprint.dart';
 import '../../../../models/facility/io_facility.dart';
+import '../../../../models/facility/processing_facility.dart';
 import '../../../util/smooth_rectangle_border.dart';
 import '../../../util/tap_scale.dart';
 import '../facility_list_item.dart';
-
-extension on EdgeInsets {
-  static EdgeInsets horizontal(double padding) {
-    return EdgeInsets.symmetric(horizontal: padding);
-  }
-}
 
 class IOFacilityBlueprintDetails extends StatelessWidget {
   final IOFacilityBlueprint blueprint;
@@ -28,39 +24,12 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
       children: [
         ListView(
           padding: EdgeInsets.zero.copyWith(
-            top: 16,
-            bottom: 92 + MediaQuery.of(context).viewPadding.bottom,
+            top: 40,
+            bottom: 140 + MediaQuery.of(context).viewPadding.bottom,
           ),
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                children: [
-                  Text(
-                    facility.name,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             if (blueprint.description != null) ...[
-              const SizedBox(height: 16),
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                child: Text(
-                  "Description:",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 4),
+              const _Header(text: "Description:"),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
@@ -71,109 +40,108 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
                 ),
               ),
             ],
-            const SizedBox(height: 16),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: Text(
-                "Pipeline:",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            const SizedBox(height: 4),
+            const _Header(text: "Pipeline:"),
             FacilityListItem(
               facility: facility,
               hideTitle: true,
               animating: false,
               collapsed: true,
             ),
+            const _Header(text: "Requirements:"),
             const SizedBox(height: 16),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: Text(
-                "Requirements:",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            ...blueprint.requirements.mapIndexed((i, r) {
-              Widget icon;
-
-              if (r.item.icon.icon != null) {
-                icon = Icon(
-                  r.item.icon.icon,
-                  color: Colors.white,
-                  size: 24,
-                );
-              } else {
-                icon = r.item.icon.widget!;
-              }
-
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 4.0,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromARGB(255, 237, 138, 0),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "$i",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w900,
+            ...blueprint.requirements.mapIndexed(
+              (i, r) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                  ).copyWith(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromARGB(255, 237, 138, 0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "${i + 1}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                r.item.name,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  r.item.name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              const Spacer(),
-                              Text("\$${r.item.price}"),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            r.item.description ?? "",
-                            style: const TextStyle(
-                              color: Colors.white60,
+                                const Spacer(),
+                                Text("\$${r.item.price}"),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              );
-            })
+                            const SizedBox(height: 4),
+                            Text(
+                              r.item.description ?? "",
+                              style: const TextStyle(
+                                color: Colors.white60,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+            if (facility is ProcessingFacility)
+              _CostBreakdown(
+                facility: facility as ProcessingFacility,
+                blueprint: blueprint,
+              )
           ],
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [
+                  0.6,
+                  1.0,
+                ],
+              ),
+            ),
+            child: Text(
+              facility.name,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w900,
+                height: 1,
+              ),
+            ),
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(
@@ -184,7 +152,10 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TapScale(
-                  onTap: Navigator.of(context).pop,
+                  onTap: () {
+                    HapticFeedback.lightImpact();
+                    Navigator.of(context).pop();
+                  },
                   child: Container(
                     width: 60,
                     height: 60,
@@ -192,6 +163,10 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
                       shape: SmoothRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         smoothness: 1.0,
+                        side: const BorderSide(
+                          color: Color(0xFF888888),
+                          width: 2,
+                        ),
                       ),
                       color: const Color.fromARGB(255, 50, 50, 50),
                     ),
@@ -204,6 +179,122 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Header extends StatelessWidget {
+  final String text;
+  const _Header({
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+      ],
+    );
+  }
+}
+
+class _CostBreakdown extends StatelessWidget {
+  final ProcessingFacility facility;
+  final IOFacilityBlueprint blueprint;
+  const _CostBreakdown({
+    required this.facility,
+    required this.blueprint,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const _Header(text: "Cost Breakdown:"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Text("Construction Cost:"),
+                  const Spacer(),
+                  Text("\$${blueprint.cost}"),
+                ],
+              ),
+              const SizedBox(height: 24.0),
+              Row(
+                children: [
+                  const Text("Operating Cost (per iteration):"),
+                  const Spacer(),
+                  Text(
+                      "\$${facility.cost * (facility.time + facility.cooldown)}"),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text("Waste Acquisition Cost:"),
+                  const Spacer(),
+                  Text(
+                    "\$${facility.inputCost}",
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Container(
+                  height: 1,
+                  decoration: const BoxDecoration(
+                    color: Colors.white54,
+                  ),
+                ),
+              ),
+              Builder(
+                builder: (context) {
+                  int totalCost =
+                      facility.cost * (facility.time + facility.cooldown) +
+                          facility.inputCost;
+
+                  return Row(
+                    children: [
+                      const Text(
+                        "Total Cost per iteration:",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "\$$totalCost",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
           ),
         )
       ],

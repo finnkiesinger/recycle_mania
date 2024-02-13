@@ -29,7 +29,10 @@ class SmoothRectangleClipper extends CustomClipper<Path> {
 
   @override
   Path getClip(Size size) {
-    return const SmoothRectangleBorder().getPath(
+    return SmoothRectangleBorder(
+      smoothness: 1.0,
+      borderRadius: BorderRadius.circular(borderRadius),
+    ).getPath(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(0, 0, size.width, size.height),
         Radius.circular(borderRadius),

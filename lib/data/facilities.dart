@@ -1,5 +1,7 @@
+import '../models/facility/facility.dart';
 import '../models/facility/io_facility.dart';
 import '../models/facility/production_facility.dart';
+import '../models/facility/storage_facility.dart';
 import '../models/item/product.dart';
 import '../models/item/resource.dart';
 import '../models/item/waste.dart';
@@ -72,9 +74,38 @@ class ComputerProductionFacility extends ProductionFacility {
   }
 }
 
+class MetalStorageFacility extends StorageFacility<Metal> {
+  MetalStorageFacility()
+      : super(
+          cost: 1,
+          name: "Metal Storage",
+          item: Resources.metal,
+        );
+
+  @override
+  Facility create() {
+    return MetalStorageFacility();
+  }
+}
+
+class PlasticStorageFacility extends StorageFacility<Plastic> {
+  PlasticStorageFacility()
+      : super(
+          cost: 1,
+          name: "Plastic Storage",
+          item: Resources.plastic,
+        );
+
+  @override
+  Facility create() {
+    return PlasticStorageFacility();
+  }
+}
+
 class Facilities {
   static final oldComputersProcessingFacility =
       OldComputersProcessingFacility();
-
   static final computersProductionFacility = ComputerProductionFacility();
+  static final metalStorageFacility = MetalStorageFacility();
+  static final plasticStorageFacility = PlasticStorageFacility();
 }

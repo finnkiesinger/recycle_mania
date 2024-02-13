@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../data/blueprints.dart';
+import '../../../../models/crafting/processing_facility_blueprint.dart';
 import '../../../util/smooth_rectangle_border.dart';
 import '../../../util/tap_scale.dart';
 import 'io_facility_blueprint_list_element.dart';
@@ -17,7 +18,8 @@ class ProcessingBlueprintList extends StatefulWidget {
 class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
   @override
   Widget build(BuildContext context) {
-    var blueprints = Blueprints.all.toList();
+    var blueprints =
+        Blueprints.all.whereType<ProcessingFacilityBlueprint>().toList();
 
     return Stack(
       children: [

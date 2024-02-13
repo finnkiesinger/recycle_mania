@@ -36,14 +36,14 @@ class _ProcessingViewState extends State<ProcessingView> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [Colors.transparent, Colors.white],
-              stops: [0.7, 1.0],
+              stops: [0.8, 1.0],
             ).createShader(bounds);
           },
           blendMode: BlendMode.dstOut,
           child: ListView.separated(
             padding: EdgeInsets.zero.copyWith(
               top: 8,
-              bottom: 100,
+              bottom: MediaQuery.of(context).viewPadding.bottom + 140,
             ),
             itemBuilder: (context, index) {
               var processor = processors[index];

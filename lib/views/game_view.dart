@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../screens/home_screen.dart';
 import '../models/util/game_state.dart';
@@ -58,9 +57,6 @@ class _GameViewState extends State<GameView> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: widget.state,
-      child: const HomeScreen(),
-    );
+    return const HomeScreen();
   }
 }
