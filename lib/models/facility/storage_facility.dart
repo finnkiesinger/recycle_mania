@@ -11,5 +11,5 @@ abstract class StorageFacility<T extends Item> extends StaticFacility {
     required this.item,
   });
 
-  int get capacity => 100;
+  int get capacity => 5;
 }

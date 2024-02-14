@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../../data/resources.dart';
 import '../../util/dock_element.dart';
 import '../../util/smooth_rectangle_border.dart';
 
 import '../../util/bottom_dock.dart';
+import '../facility/storage_blueprint/storage_blueprint_list.dart';
 import 'resource_view.dart';
 import 'storage_list.dart';
 
@@ -83,6 +85,18 @@ class _AlternativeResourcesViewState extends State<AlternativeResourcesView>
                           child: DockElement(
                             onTap: () {
                               HapticFeedback.lightImpact();
+                              showCupertinoModalBottomSheet(
+                                context: context,
+                                isDismissible: false,
+                                enableDrag: false,
+                                barrierColor: Colors.black38,
+                                duration: const Duration(milliseconds: 250),
+                                builder: (context) {
+                                  return const Scaffold(
+                                    body: StorageBlueprintList(),
+                                  );
+                                },
+                              );
                             },
                             gradient: const LinearGradient(
                               begin: Alignment.topLeft,

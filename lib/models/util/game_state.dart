@@ -4,6 +4,7 @@ import '../../data/blueprints.dart';
 import '../crafting/blueprint.dart';
 import '../crafting/facility_blueprint.dart';
 import '../crafting/io_facility_blueprint.dart';
+import '../crafting/storage_facility_blueprint.dart';
 import '../facility/processing_facility.dart';
 import '../facility/production_facility.dart';
 import '../item/resource.dart';
@@ -22,6 +23,7 @@ class GameState with ChangeNotifier {
     var game = GameState(
       facilities: [
         Facilities.metalStorageFacility.create(),
+        Facilities.plasticStorageFacility.create(),
         Facilities.plasticStorageFacility.create(),
         Facilities.oldComputersProcessingFacility.create(),
         Facilities.computersProductionFacility.create(),
@@ -82,6 +84,10 @@ class GameState with ChangeNotifier {
   void buildFacility(FacilityBlueprint blueprint) {
     if (blueprint is IOFacilityBlueprint) {
       var facility = (blueprint.output as IOFacility).create();
+      facilities.add(facility);
+    } else if (blueprint is StorageFacilityBlueprint) {
+      print("Hooo");
+      var facility = (blueprint.output as StorageFacility).create();
       facilities.add(facility);
     }
 

@@ -54,10 +54,33 @@ class MeltingStation extends Item {
         );
 }
 
+class CostPlaceholder extends Item {
+  const CostPlaceholder({required super.price})
+      : super(
+            icon: const RMIcon(icon: Icons.money_rounded),
+            name: "Cost Placeholder");
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! CostPlaceholder) {
+      return false;
+    }
+
+    return other.hashCode == hashCode;
+  }
+
+  @override
+  int get hashCode => price;
+}
+
 class CraftingItems {
   static const shredder = Shredder();
   static const computerDismantlingStation = ComputerDismantlingStation();
   static const dataWiper = DataWiper();
   static const hazardousWasteDisposer = HazardousWasteDisposer();
   static const meltingStation = MeltingStation();
+
+  static CostPlaceholder costPlaceholder(int cost) {
+    return CostPlaceholder(price: cost);
+  }
 }

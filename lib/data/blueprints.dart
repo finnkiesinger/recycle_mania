@@ -61,12 +61,36 @@ class MetalStorageFacilityBlueprint extends StorageFacilityBlueprint<Metal> {
   MetalStorageFacilityBlueprint()
       : super(
             facility: Facilities.metalStorageFacility,
-            requirements: [],
+            requirements: [
+              Input(
+                amount: 1,
+                item: CraftingItems.costPlaceholder(10000),
+              ),
+            ],
             description: "This facility stores Metal.");
 
   @override
   Blueprint create() {
     return MetalStorageFacilityBlueprint();
+  }
+}
+
+class PlasticStorageFacilityBlueprint
+    extends StorageFacilityBlueprint<Plastic> {
+  PlasticStorageFacilityBlueprint()
+      : super(
+            facility: Facilities.plasticStorageFacility,
+            requirements: [
+              Input(
+                amount: 1,
+                item: CraftingItems.costPlaceholder(10000),
+              ),
+            ],
+            description: "This facility stores Plastic.");
+
+  @override
+  Blueprint create() {
+    return PlasticStorageFacilityBlueprint();
   }
 }
 
@@ -77,8 +101,14 @@ class Blueprints {
   static final computerProductionFacilityBlueprint =
       ComputerProductionFacilityBlueprint();
 
+  static final metalStorageFacilityBlueprint = MetalStorageFacilityBlueprint();
+  static final plasticStorageFacilityBlueprint =
+      PlasticStorageFacilityBlueprint();
+
   static final all = [
     oldComputerProcessingFacilityBlueprint,
     computerProductionFacilityBlueprint,
+    metalStorageFacilityBlueprint,
+    plasticStorageFacilityBlueprint,
   ];
 }

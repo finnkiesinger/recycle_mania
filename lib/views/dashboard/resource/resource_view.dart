@@ -22,23 +22,6 @@ class ResourceView extends StatefulWidget {
 }
 
 class _ResourceViewState extends State<ResourceView> {
-  Widget _buildStorageView(GameState game) {
-    var stored = game.storage[widget.resource] ?? 0;
-    var capacity = game.totalCapacity(widget.resource);
-
-    var fillPercentage = stored / max(capacity, 1);
-
-    return LinearProgressView(
-      leading: const Icon(
-        Icons.warehouse_rounded,
-        color: Colors.white,
-      ),
-      trailing: Text("$stored / $capacity"),
-      color: Colors.cyan,
-      progress: fillPercentage,
-    );
-  }
-
   List<Widget> _buildProductionView(GameState game) {
     var productionRate = game.productionRate(widget.resource);
     var consumptionRate = game.consumptionRate(widget.resource);
@@ -104,8 +87,6 @@ class _ResourceViewState extends State<ResourceView> {
         ResourceNameView(
           resource: widget.resource,
         ),
-        const SizedBox(height: 24),
-        _buildStorageView(game),
         const SizedBox(height: 20),
         ..._buildProductionView(game),
       ],
