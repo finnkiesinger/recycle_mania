@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../data/blueprints.dart';
 import '../../../../models/crafting/processing_facility_blueprint.dart';
+import '../../../../models/util/game_state.dart';
 import '../../../util/smooth_rectangle_border.dart';
 import '../../../util/tap_scale.dart';
 import 'io_facility_blueprint_list_element.dart';
@@ -18,8 +19,9 @@ class ProcessingBlueprintList extends StatefulWidget {
 class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
   @override
   Widget build(BuildContext context) {
+    var game = context.watch<GameState>();
     var blueprints =
-        Blueprints.all.whereType<ProcessingFacilityBlueprint>().toList();
+        game.blueprints.whereType<ProcessingFacilityBlueprint>().toList();
 
     return Stack(
       children: [
@@ -66,7 +68,7 @@ class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: const [
-                  0.6,
+                  0.7,
                   1.0,
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/blueprints.dart';
 import '../crafting/blueprint.dart';
 import '../crafting/facility_blueprint.dart';
 import '../crafting/io_facility_blueprint.dart';
@@ -25,6 +26,9 @@ class GameState with ChangeNotifier {
         Facilities.oldComputersProcessingFacility.create(),
         Facilities.computersProductionFacility.create(),
       ],
+      blueprints: [
+        ...Blueprints.all.map((e) => e.create()),
+      ],
       storage: {},
       money: 50000,
     );
@@ -35,6 +39,7 @@ class GameState with ChangeNotifier {
 
   final List<Facility> facilities;
   final Map<Item, int> storage;
+  final List<Blueprint> blueprints;
   int money;
 
   SpeedSetting speedSetting;
@@ -43,6 +48,7 @@ class GameState with ChangeNotifier {
     required this.facilities,
     required this.money,
     required this.storage,
+    required this.blueprints,
     this.speedSetting = SpeedSetting.normal,
   });
 

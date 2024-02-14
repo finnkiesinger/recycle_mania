@@ -5,10 +5,11 @@ import 'package:provider/provider.dart';
 
 import '../../util/bottom_dock.dart';
 import '../../util/dock_element.dart';
+import '../../util/tap_scale.dart';
 import 'facility_list_item.dart';
 import '../../../models/facility/processing_facility.dart';
 import '../../../models/util/game_state.dart';
-import 'blueprint/processing_blueprint_list.dart';
+import 'processing_blueprint/processing_blueprint_list.dart';
 
 const processViewNodeHeight = 80.0;
 
@@ -48,7 +49,25 @@ class _ProcessingViewState extends State<ProcessingView> {
             itemBuilder: (context, index) {
               var processor = processors[index];
 
-              return FacilityListItem(facility: processor);
+              return Stack(
+                children: [
+                  FacilityListItem(facility: processor),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 24.0, top: 8.0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: TapScale(
+                        onTap: () {},
+                        child: const Icon(
+                          Icons.info_rounded,
+                          size: 32,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
             },
             separatorBuilder: (context, index) {
               return Padding(

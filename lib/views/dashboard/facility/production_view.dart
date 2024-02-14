@@ -35,7 +35,8 @@ class _ProductionViewState extends State<ProductionView> {
           blendMode: BlendMode.dstOut,
           child: ListView.separated(
             padding: EdgeInsets.zero.copyWith(
-              bottom: 100,
+              top: 8,
+              bottom: MediaQuery.of(context).viewPadding.bottom + 140,
             ),
             itemBuilder: (context, index) {
               var producer = producers[index];

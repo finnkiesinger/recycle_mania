@@ -1,7 +1,7 @@
 import '../facility/production_facility.dart';
 import 'io_facility_blueprint.dart';
 
-class ProductionFacilityBlueprint extends IOFacilityBlueprint {
+abstract class ProductionFacilityBlueprint extends IOFacilityBlueprint {
   const ProductionFacilityBlueprint({
     required ProductionFacility facility,
     required super.requirements,

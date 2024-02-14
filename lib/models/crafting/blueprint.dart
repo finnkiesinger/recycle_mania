@@ -17,4 +17,6 @@ abstract class Blueprint {
       : requirements
           .map((r) => r.item.price * r.amount)
           .reduce((value, element) => value + element);
+
+  Blueprint create();
 }

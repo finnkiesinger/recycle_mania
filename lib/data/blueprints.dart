@@ -1,8 +1,11 @@
+import '../models/crafting/blueprint.dart';
 import '../models/crafting/processing_facility_blueprint.dart';
 import '../models/crafting/production_facility_blueprint.dart';
+import '../models/crafting/storage_facility_blueprint.dart';
 import '../models/util/input.dart';
 import 'crafting.dart';
 import 'facilities.dart';
+import 'resources.dart';
 
 class OldComputerProcessingFacilityBlueprint
     extends ProcessingFacilityBlueprint {
@@ -34,6 +37,11 @@ class OldComputerProcessingFacilityBlueprint
           description:
               "The first step in the recycling process of old computers is wiping the data from the device. It is then dismantled and the materials get separated before being shredded into small pieces. The materials can then be recycled. Hazardous waste is removed in the process and disposed of in a safe and environmentally responsible manner.",
         );
+
+  @override
+  Blueprint create() {
+    return OldComputerProcessingFacilityBlueprint();
+  }
 }
 
 class ComputerProductionFacilityBlueprint extends ProductionFacilityBlueprint {
@@ -42,6 +50,24 @@ class ComputerProductionFacilityBlueprint extends ProductionFacilityBlueprint {
           facility: Facilities.computersProductionFacility,
           requirements: [],
         );
+
+  @override
+  Blueprint create() {
+    return ComputerProductionFacilityBlueprint();
+  }
+}
+
+class MetalStorageFacilityBlueprint extends StorageFacilityBlueprint<Metal> {
+  MetalStorageFacilityBlueprint()
+      : super(
+            facility: Facilities.metalStorageFacility,
+            requirements: [],
+            description: "This facility stores Metal.");
+
+  @override
+  Blueprint create() {
+    return MetalStorageFacilityBlueprint();
+  }
 }
 
 class Blueprints {

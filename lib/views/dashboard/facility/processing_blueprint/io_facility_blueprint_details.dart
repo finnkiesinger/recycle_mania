@@ -24,7 +24,7 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
       children: [
         ListView(
           padding: EdgeInsets.zero.copyWith(
-            top: 40,
+            top: 56,
             bottom: 140 + MediaQuery.of(context).viewPadding.bottom,
           ),
           children: [
@@ -128,7 +128,7 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: const [
-                  0.6,
+                  0.7,
                   1.0,
                 ],
               ),
@@ -136,7 +136,7 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
             child: Text(
               facility.name,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 28,
                 fontWeight: FontWeight.w900,
                 height: 1,
               ),

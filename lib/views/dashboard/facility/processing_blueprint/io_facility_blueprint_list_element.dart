@@ -210,20 +210,24 @@ class _ChargeButtonState extends State<ChargeButton>
 
   _start(_) {
     if (widget.disabled) return;
+    print("start");
+
     setState(() {
       _down = true;
     });
     Vibration.vibrate(
-      pattern: List.generate(255, (index) => widget.chargeTime * 1000 ~/ 255),
-      intensities: List.generate(255, (index) => min(255, index + 1) ~/ 8),
+      pattern: List.generate(254, (index) => widget.chargeTime * 1000 ~/ 254),
+      intensities: List.generate(254, (index) => min(255, index + 1) ~/ 8),
     );
     _ticker?.start();
   }
 
-  _stop(_) {
+  _stop(_) async {
     if (widget.disabled) return;
+
     setState(() {
       _down = false;
+
       Vibration.cancel();
       if (_progress < 0.05) {
         HapticFeedback.mediumImpact();

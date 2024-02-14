@@ -66,10 +66,10 @@ class _DashboardState extends State<Dashboard> {
               });
             },
             controller: _controller,
-            children: const [
-              ProcessingView(),
-              AlternativeResourcesView(),
-              ProductionView(),
+            children: [
+              const ProcessingView(),
+              AlternativeResourcesView(active: _page == 1),
+              const ProductionView(),
             ],
           ),
         ),
