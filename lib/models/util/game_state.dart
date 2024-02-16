@@ -86,7 +86,6 @@ class GameState with ChangeNotifier {
       var facility = (blueprint.output as IOFacility).create();
       facilities.add(facility);
     } else if (blueprint is StorageFacilityBlueprint) {
-      print("Hooo");
       var facility = (blueprint.output as StorageFacility).create();
       facilities.add(facility);
     }

@@ -60,7 +60,6 @@ class _ChargeButtonState extends State<ChargeButton>
 
   _start(_) {
     if (widget.disabled) return;
-    print("start");
 
     setState(() {
       _down = true;
