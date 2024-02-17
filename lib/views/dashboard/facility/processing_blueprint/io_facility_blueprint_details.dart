@@ -1,12 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../../models/crafting/io_facility_blueprint.dart';
 import '../../../../models/facility/io_facility.dart';
 import '../../../../models/facility/processing_facility.dart';
-import '../../../util/smooth_rectangle_border.dart';
-import '../../../util/tap_scale.dart';
+import '../../../util/list_header.dart';
+import '../../../util/list_modal.dart';
 import '../facility_list_item.dart';
 
 class IOFacilityBlueprintDetails extends StatelessWidget {
@@ -20,197 +19,94 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return ListModal(
+      title: facility.name,
+      centered: false,
+      separated: false,
       children: [
-        ListView(
-          padding: EdgeInsets.zero.copyWith(
-            top: 56,
-            bottom: 140 + MediaQuery.of(context).viewPadding.bottom,
-          ),
-          children: [
-            if (blueprint.description != null) ...[
-              const _Header(text: "Description:"),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  blueprint.description!,
-                  style: const TextStyle(
-                    color: Colors.white60,
-                  ),
-                ),
+        if (blueprint.description != null) ...[
+          const Header(text: "Description:"),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              blueprint.description!,
+              style: const TextStyle(
+                color: Colors.white60,
               ),
-            ],
-            const _Header(text: "Pipeline:"),
-            FacilityListItem(
-              facility: facility,
-              hideTitle: true,
-              animating: false,
-              collapsed: true,
             ),
-            const _Header(text: "Requirements:"),
-            const SizedBox(height: 16),
-            ...blueprint.requirements.mapIndexed(
-              (i, r) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                  ).copyWith(bottom: 16),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromARGB(255, 237, 138, 0),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "${i + 1}",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
+          ),
+        ],
+        const Header(text: "Pipeline:"),
+        FacilityListItem(
+          facility: facility,
+          hideTitle: true,
+          animating: false,
+          collapsed: true,
+        ),
+        const Header(text: "Requirements:"),
+        const SizedBox(height: 16),
+        ...blueprint.requirements.mapIndexed(
+          (i, r) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+              ).copyWith(bottom: 16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color.fromARGB(255, 237, 138, 0),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "${i + 1}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  r.item.name,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Text("\$${r.item.price}"),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
                             Text(
-                              r.item.description ?? "",
+                              r.item.name,
                               style: const TextStyle(
-                                color: Colors.white60,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
+                            const Spacer(),
+                            Text("\$${r.item.price}"),
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
-            if (facility is ProcessingFacility)
-              _CostBreakdown(
-                facility: facility as ProcessingFacility,
-                blueprint: blueprint,
-              )
-          ],
-        ),
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: const [
-                  0.7,
-                  1.0,
-                ],
-              ),
-            ),
-            child: Text(
-              facility.name,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w900,
-                height: 1,
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewPadding.bottom + 16),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TapScale(
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: ShapeDecoration(
-                      shape: SmoothRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        smoothness: 1.0,
-                        side: const BorderSide(
-                          color: Color(0xFF888888),
-                          width: 2,
+                        const SizedBox(height: 4),
+                        Text(
+                          r.item.description ?? "",
+                          style: const TextStyle(
+                            color: Colors.white60,
+                          ),
                         ),
-                      ),
-                      color: const Color.fromARGB(255, 50, 50, 50),
+                      ],
                     ),
-                    child: const Icon(
-                      Icons.close_rounded,
-                      color: Color(0xFF888888),
-                      size: 42,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+                  )
+                ],
+              ),
+            );
+          },
         ),
-      ],
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  final String text;
-  const _Header({
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
+        if (facility is ProcessingFacility)
+          _CostBreakdown(
+            facility: facility as ProcessingFacility,
+            blueprint: blueprint,
           ),
-          child: Text(
-            text,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
-        ),
-        const SizedBox(height: 4),
       ],
     );
   }
@@ -229,7 +125,7 @@ class _CostBreakdown extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _Header(text: "Cost Breakdown:"),
+        const Header(text: "Cost Breakdown:"),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
