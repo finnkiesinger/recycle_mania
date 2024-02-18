@@ -88,7 +88,7 @@ class _ProcessingViewState extends State<ProcessingView> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 24),
+          padding: const EdgeInsets.only(bottom: 16),
           child: Align(
             alignment: Alignment.bottomCenter,
             child: BottomDock(

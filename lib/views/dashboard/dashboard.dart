@@ -32,7 +32,10 @@ class _DashboardState extends State<Dashboard> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(
+            top: 16,
+            bottom: 8,
+          ),
           child: DashboardTabView(
             index: _page,
             onChange: (index) {
