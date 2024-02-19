@@ -34,6 +34,7 @@ class OldComputerProcessingFacilityBlueprint
               amount: 1,
             ),
           ],
+          price: 50000,
           description:
               "The first step in the recycling process of old computers is wiping the data from the device. It is then dismantled and the materials get separated before being shredded into small pieces. The materials can then be recycled. Hazardous waste is removed in the process and disposed of in a safe and environmentally responsible manner.",
         );
@@ -48,6 +49,7 @@ class ComputerProductionFacilityBlueprint extends ProductionFacilityBlueprint {
   ComputerProductionFacilityBlueprint()
       : super(
           facility: Facilities.computersProductionFacility,
+          price: 100000,
           requirements: [],
         );
 
@@ -67,6 +69,7 @@ class MetalStorageFacilityBlueprint extends StorageFacilityBlueprint<Metal> {
                 item: CraftingItems.costPlaceholder(10000),
               ),
             ],
+            price: 25000,
             description: "This facility stores Metal.");
 
   @override
@@ -86,6 +89,7 @@ class PlasticStorageFacilityBlueprint
                 item: CraftingItems.costPlaceholder(10000),
               ),
             ],
+            price: 40000,
             description: "This facility stores Plastic.");
 
   @override

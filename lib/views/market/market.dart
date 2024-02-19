@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../dashboard/dashboard_tab.dart';
 import '../dashboard/dashboard_tab_view.dart';
+import 'blueprint/blueprint_market.dart';
 
 class Market extends StatefulWidget {
   const Market({super.key});
@@ -64,9 +65,7 @@ class _MarketState extends State<Market> {
             },
             controller: _controller,
             children: [
-              Center(
-                child: Text("Blueprints"),
-              ),
+              BlueprintMarket(),
               Center(
                 child: Text("Powerups"),
               ),

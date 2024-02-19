@@ -78,7 +78,7 @@ class ProductionFacilityBlueprintElement extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

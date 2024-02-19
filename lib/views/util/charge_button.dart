@@ -52,6 +52,8 @@ class _ChargeButtonState extends State<ChargeButton>
         var newProgress = elapsed.inMilliseconds / (widget.chargeTime * 1000);
         if (newProgress >= 1) {
           widget.onTap();
+          _ticker?.dispose();
+          _ticker = null;
         }
         _progress = clampDouble(newProgress, 0, 1);
       });

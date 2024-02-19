@@ -5,6 +5,7 @@ abstract class ProcessingFacilityBlueprint extends IOFacilityBlueprint {
   const ProcessingFacilityBlueprint({
     required ProcessingFacility facility,
     required super.requirements,
+    required super.price,
     super.description,
   }) : super(facility: facility);
 }

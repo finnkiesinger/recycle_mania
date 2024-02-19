@@ -7,6 +7,7 @@ abstract class StorageFacilityBlueprint<T extends Item>
   StorageFacilityBlueprint({
     required StorageFacility<T> facility,
     required super.requirements,
+    required super.price,
     super.description,
   }) : super(facility: facility);
 }

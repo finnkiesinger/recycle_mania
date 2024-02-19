@@ -5,10 +5,12 @@ abstract class Blueprint {
   final List<Input> requirements;
   final Craftable output;
   final String? description;
+  final int price;
 
   const Blueprint({
     required this.output,
     required this.requirements,
+    required this.price,
     this.description,
   });
 

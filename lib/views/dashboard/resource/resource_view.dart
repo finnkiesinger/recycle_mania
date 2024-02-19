@@ -37,16 +37,6 @@ class _ResourceViewState extends State<ResourceView> {
           Icons.trending_up_rounded,
           color: Colors.black87,
         ),
-        trailing: consumptionRate > 0.0
-            ? Text(
-                NumberFormat.percentPattern()
-                    .format(productionRate / consumptionRate),
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w900,
-                ),
-              )
-            : null,
         color: const Color(0xFFffa100),
         progress: productionRate / maxRate,
       ),
@@ -56,21 +46,6 @@ class _ResourceViewState extends State<ResourceView> {
           Icons.trending_down_rounded,
           color: Colors.white,
         ),
-        trailing: productionRate > 0.0
-            ? Text(
-                NumberFormat.percentPattern()
-                    .format(consumptionRate / productionRate),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black87,
-                      blurRadius: 12,
-                    ),
-                  ],
-                ),
-              )
-            : null,
         color: Colors.deepOrange,
         progress: consumptionRate / maxRate,
       ),

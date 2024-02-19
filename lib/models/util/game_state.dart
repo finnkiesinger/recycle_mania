@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../data/blueprints.dart';
 import '../crafting/blueprint.dart';
 import '../crafting/facility_blueprint.dart';
 import '../crafting/io_facility_blueprint.dart';
@@ -8,7 +7,6 @@ import '../crafting/storage_facility_blueprint.dart';
 import '../facility/processing_facility.dart';
 import '../facility/production_facility.dart';
 import '../item/resource.dart';
-import '../../data/facilities.dart';
 import '../facility/io_facility.dart';
 import '../facility/facility.dart';
 import '../facility/storage_facility.dart';
@@ -21,18 +19,10 @@ class GameState with ChangeNotifier {
 
   static GameState create() {
     var game = GameState(
-      facilities: [
-        Facilities.metalStorageFacility.create(),
-        Facilities.plasticStorageFacility.create(),
-        Facilities.plasticStorageFacility.create(),
-        Facilities.oldComputersProcessingFacility.create(),
-        Facilities.computersProductionFacility.create(),
-      ],
-      blueprints: [
-        ...Blueprints.all.map((e) => e.create()),
-      ],
+      facilities: [],
+      blueprints: [],
       storage: {},
-      money: 50000,
+      money: 5000000,
     );
 
     active = game;
@@ -91,6 +81,11 @@ class GameState with ChangeNotifier {
     }
 
     changeMoney(-blueprint.cost);
+  }
+
+  void addBlueprint(Blueprint blueprint) {
+    blueprints.add(blueprint);
+    changeMoney(-blueprint.price);
   }
 
   bool fulfillsRequirementsFor(Blueprint blueprint) {
