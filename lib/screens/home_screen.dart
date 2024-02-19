@@ -1,6 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../models/util/game_state.dart';
 import '../views/dashboard/dashboard.dart';
 import '../views/finance/balance_change_view.dart';
 import '../views/finance/balance_view.dart';
@@ -20,6 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var game = context.watch<GameState>();
+    var roc = game.activeCost;
+
     return SafeArea(
       bottom: false,
       child: Column(
@@ -86,11 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const RMTabItem(
                   widget: BalanceView(),
-                  color: Colors.blue,
+                  color: Color.fromARGB(255, 0, 100, 181),
                 ),
-                const RMTabItem(
-                  widget: BalanceChangeView(),
-                  color: Colors.green,
+                RMTabItem(
+                  widget: const BalanceChangeView(),
+                  color: roc >= 0
+                      ? const Color.fromARGB(255, 0, 163, 95)
+                      : const Color.fromARGB(255, 231, 48, 35),
                 ),
                 RMTabItem(
                   onTap: () {
