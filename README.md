@@ -54,4 +54,5 @@ I have no intention of stopping with the development of this game. There are two
 - Facility Capacity restrictions, i.e. in addition to blueprints the player will also need to increase the size of the recycling facility
 - Dynamic economy
 - Integrating **Recycle Rumble** as an alternative way for waste acquisition in the game
-  I believe that this is a great game idea beyond the scope of this challenge and has significant potential. The most important thing right now however is collecting feedback and making this game fun for the players.
+
+I believe that this is a great game idea beyond the scope of this challenge and has significant potential. The most important thing right now however is collecting feedback and making this game fun for the players.
