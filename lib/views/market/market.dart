@@ -27,49 +27,73 @@ class _MarketState extends State<Market> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 16,
-            bottom: 8,
-          ),
-          child: DashboardTabView(
-            index: _page,
-            onChange: (index) {
-              setState(() {
-                _page = index;
-                _controller.animateToPage(
-                  _page,
-                  curve: Curves.easeOut,
-                  duration: const Duration(milliseconds: 200),
-                );
-              });
-            },
-            tabs: const [
-              DashboardTab(
-                name: "Blueprints",
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 16,
+                bottom: 8,
               ),
-              DashboardTab(
-                name: "Powerups",
+              child: DashboardTabView(
+                index: _page,
+                onChange: (index) {
+                  setState(
+                    () {
+                      _page = index;
+                      _controller.animateToPage(
+                        _page,
+                        curve: Curves.easeOut,
+                        duration: const Duration(milliseconds: 200),
+                      );
+                    },
+                  );
+                },
+                tabs: const [
+                  DashboardTab(
+                    name: "Blueprints",
+                  ),
+                  DashboardTab(
+                    name: "Powerups",
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: PageView(
+                onPageChanged: (index) {
+                  setState(() {
+                    _page = index;
+                  });
+                },
+                controller: _controller,
+                children: const [
+                  BlueprintMarket(),
+                  Center(
+                    child: Text("Powerups"),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          child: PageView(
-            onPageChanged: (index) {
-              setState(() {
-                _page = index;
-              });
-            },
-            controller: _controller,
-            children: [
-              BlueprintMarket(),
-              Center(
-                child: Text("Powerups"),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 10,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                  Theme.of(context).scaffoldBackgroundColor,
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-            ],
+            ),
           ),
         ),
       ],

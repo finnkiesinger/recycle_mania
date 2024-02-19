@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+import 'package:badges/badges.dart' as badges;
 
 import '../../../data/blueprints.dart';
 import '../../../models/crafting/io_facility_blueprint.dart';
@@ -13,6 +14,9 @@ import '../../../models/crafting/storage_facility_blueprint.dart';
 import '../../../models/facility/io_facility.dart';
 import '../../../models/facility/production_facility.dart';
 import '../../../models/facility/storage_facility.dart';
+import '../../../models/item/item.dart';
+import '../../../models/item/product.dart';
+import '../../../models/item/resource.dart';
 import '../../../models/util/game_state.dart';
 import '../../dashboard/facility/facility_list_item.dart';
 import '../../dashboard/facility/processing_blueprint/io_facility_blueprint_details.dart';
@@ -51,7 +55,10 @@ class BlueprintMarket extends StatelessWidget {
             child: Container(
               height: 2,
               width: 150,
-              color: Colors.red,
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(2.0),
+              ),
             ),
           ),
         );
@@ -165,32 +172,164 @@ class _StorageFacilityBlueprintMarketItem extends StatelessWidget {
 
   StorageFacility get facility => blueprint.output as StorageFacility;
 
+  Widget _buildNode(Item item) {
+    Color color = Colors.red;
+    Widget? child;
+
+    if (item is Resource) {
+      color = item.color;
+    }
+
+    if (item is Product) {
+      color = item.color ?? color;
+    }
+
+    if (item.icon.icon != null) {
+      child = Icon(
+        item.icon.icon,
+        color: Colors.white,
+        size: 32,
+      );
+    } else if (item.icon.widget != null) {
+      child = item.icon.widget;
+    }
+
+    return Tooltip(
+      message: item.name,
+      decoration: ShapeDecoration(
+        shape: SmoothRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          smoothness: 1.0,
+          side: const BorderSide(
+            color: Colors.white,
+            width: 2,
+          ),
+        ),
+        shadows: const [
+          BoxShadow(
+            color: Colors.black54,
+            blurRadius: 16,
+          ),
+        ],
+        color: color,
+      ),
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+      triggerMode: TooltipTriggerMode.tap,
+      child: badges.Badge(
+        position: badges.BadgePosition.bottomEnd(),
+        badgeContent: Text(
+          "x${facility.capacity}",
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            height: 1,
+          ),
+        ),
+        badgeStyle: badges.BadgeStyle(
+          shape: badges.BadgeShape.square,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+          borderRadius: BorderRadius.circular(8),
+          badgeColor: color,
+          borderSide: const BorderSide(
+            color: Colors.white,
+            width: 2,
+          ),
+        ),
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: color,
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var game = context.watch<GameState>();
+    var inInventory = game.blueprints.contains(blueprint);
+
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12.0,
-              vertical: 4,
-            ),
-            decoration: ShapeDecoration(
-              shape: SmoothRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                smoothness: 1,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 4,
+                ),
+                decoration: ShapeDecoration(
+                  shape: SmoothRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    smoothness: 1,
+                  ),
+                  color: Colors.white10,
+                ),
+                child: Text(
+                  facility.name,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
-              color: Colors.white10,
-            ),
-            child: Text(
-              facility.name,
-              style: TextStyle(
-                fontSize: 20,
-                color: Theme.of(context).textTheme.bodyMedium?.color,
-                fontWeight: FontWeight.w600,
+              const Spacer(),
+              _buildNode(facility.item),
+              const SizedBox(width: 12),
+            ],
+          ),
+          const SizedBox(height: 32),
+          Row(
+            children: [
+              Expanded(child: Container()),
+              const SizedBox(width: 16),
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 150),
+                  child: inInventory
+                      ? ChargeButton(
+                          key: const ValueKey<bool>(false),
+                          icon: Icons.attach_money_rounded,
+                          text: "BOUGHT",
+                          color: const Color.fromARGB(255, 0, 163, 95),
+                          chargeColor: const Color.fromARGB(255, 0, 114, 67),
+                          disabled: true,
+                          onTap: () {},
+                          chargeTime: 1.0,
+                          hint: "",
+                        )
+                      : ChargeButton(
+                          key: const ValueKey<bool>(true),
+                          icon: Icons.attach_money_rounded,
+                          text: "BUY",
+                          color: const Color.fromARGB(255, 0, 163, 95),
+                          chargeColor: const Color.fromARGB(255, 0, 114, 67),
+                          disabled: !game.fulfillsRequirementsFor(
+                            blueprint,
+                            purchase: true,
+                          ),
+                          onTap: () {
+                            game.addBlueprint(blueprint);
+                            HapticFeedback.lightImpact();
+                          },
+                          chargeTime: 1.0,
+                          hint:
+                              "Cost: \$${NumberFormat.decimalPattern(Localizations.localeOf(context).toString()).format(blueprint.price)}",
+                        ),
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

@@ -88,7 +88,10 @@ class GameState with ChangeNotifier {
     changeMoney(-blueprint.price);
   }
 
-  bool fulfillsRequirementsFor(Blueprint blueprint) {
+  bool fulfillsRequirementsFor(Blueprint blueprint, {bool purchase = false}) {
+    if (purchase) {
+      return money > blueprint.price;
+    }
     return money > blueprint.cost;
   }
 

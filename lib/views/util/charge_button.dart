@@ -189,10 +189,11 @@ class _ChargeButtonState extends State<ChargeButton>
             ),
           ),
         ),
+        const SizedBox(height: 2),
         Text(
           widget.hint,
           style: const TextStyle(
-            color: Colors.white38,
+            color: Colors.white70,
           ),
         ),
       ],
