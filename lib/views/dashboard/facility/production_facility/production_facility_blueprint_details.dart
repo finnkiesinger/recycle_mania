@@ -61,7 +61,7 @@ class _ProfitBreakdown extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Header(text: "Cost Breakdown:"),
+        const Header(text: "Profit Breakdown:"),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(

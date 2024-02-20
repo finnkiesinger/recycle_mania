@@ -16,18 +16,31 @@ class GameView extends StatefulWidget {
   State<GameView> createState() => _GameViewState();
 }
 
+const baseUpdateTime = 1000;
+const updateInterval = 1000 ~/ 60;
+
 class _GameViewState extends State<GameView> with WidgetsBindingObserver {
   late Timer _timer;
+  var _accu = 0;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) async {
-      if (widget.state.speedSetting != SpeedSetting.paused) {
-        widget.state.update();
-      }
-    });
+    _timer = Timer.periodic(
+      const Duration(milliseconds: updateInterval),
+      (timer) async {
+        _accu += updateInterval;
+
+        if (_accu > baseUpdateTime ~/ widget.state.timeMultiplier) {
+          _accu = 0;
+
+          if (widget.state.speedSetting != SpeedSetting.paused) {
+            widget.state.update();
+          }
+        }
+      },
+    );
   }
 
   @override

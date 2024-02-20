@@ -7,6 +7,8 @@ abstract class TimedPowerup extends Powerup {
 
   TimedPowerup({
     required super.name,
+    required super.description,
+    required super.price,
     required this.time,
     required this.end,
   });

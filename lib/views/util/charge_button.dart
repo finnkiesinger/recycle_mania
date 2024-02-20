@@ -194,6 +194,7 @@ class _ChargeButtonState extends State<ChargeButton>
           widget.hint,
           style: const TextStyle(
             color: Colors.white70,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],

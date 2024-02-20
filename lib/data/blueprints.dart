@@ -3,7 +3,7 @@ import '../models/crafting/processing_facility_blueprint.dart';
 import '../models/crafting/production_facility_blueprint.dart';
 import '../models/crafting/storage_facility_blueprint.dart';
 import '../models/util/input.dart';
-import 'crafting.dart';
+import 'crafting_items.dart';
 import 'facilities.dart';
 import 'resources.dart';
 

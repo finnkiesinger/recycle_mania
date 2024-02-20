@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../models/facility/io_facility.dart';
 import '../../../models/util/game_state.dart';
 
+import '../../game_view.dart';
 import '../../util/smooth_rectangle_border.dart';
 
 class ProgressView extends StatefulWidget {
@@ -24,6 +25,8 @@ class ProgressView extends StatefulWidget {
 class _ProgressViewState extends State<ProgressView> {
   @override
   Widget build(BuildContext context) {
+    var game = context.watch<GameState>();
+
     return GestureDetector(
       onTap: () {
         context.read<GameState>().togglePause(widget.facility);
@@ -47,7 +50,7 @@ class _ProgressViewState extends State<ProgressView> {
             radius: 18,
             animation: true,
             animateFromLastPercent: true,
-            animationDuration: 1000,
+            animationDuration: baseUpdateTime ~/ game.timeMultiplier,
             lineWidth: 3,
             circularStrokeCap: CircularStrokeCap.round,
             backgroundColor: Colors.white24,

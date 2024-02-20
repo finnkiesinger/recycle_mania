@@ -46,7 +46,7 @@ class Metal extends Resource {
           icon: const RMIcon(
             icon: Icons.table_rows_rounded,
           ),
-          color: Colors.blueGrey,
+          color: const Color.fromARGB(255, 104, 144, 166),
           price: 50,
         );
 }

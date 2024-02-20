@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/resources.dart';
+import '../../../data/resources.dart';
 
 class ResourcesView extends StatefulWidget {
   const ResourcesView({super.key});

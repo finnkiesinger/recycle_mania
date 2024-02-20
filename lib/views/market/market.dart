@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../dashboard/dashboard_tab.dart';
 import '../dashboard/dashboard_tab_view.dart';
 import 'blueprint/blueprint_market.dart';
+import 'powerup/powerups_market.dart';
 
 class Market extends StatefulWidget {
   const Market({super.key});
@@ -70,9 +71,7 @@ class _MarketState extends State<Market> {
                 controller: _controller,
                 children: const [
                   BlueprintMarket(),
-                  Center(
-                    child: Text("Powerups"),
-                  ),
+                  PowerupsMarket(),
                 ],
               ),
             ),
@@ -82,16 +81,18 @@ class _MarketState extends State<Market> {
           bottom: 0,
           left: 0,
           right: 0,
-          height: 10,
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
-                  Theme.of(context).scaffoldBackgroundColor,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+          height: 100,
+          child: IgnorePointer(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0),
+                    Theme.of(context).scaffoldBackgroundColor,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
             ),
           ),

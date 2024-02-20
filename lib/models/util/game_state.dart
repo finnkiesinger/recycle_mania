@@ -11,6 +11,8 @@ import '../facility/io_facility.dart';
 import '../facility/facility.dart';
 import '../facility/storage_facility.dart';
 import '../item/item.dart';
+import '../powerup/powerup.dart';
+import 'preset.dart';
 
 enum SpeedSetting { normal, paused }
 
@@ -21,6 +23,7 @@ class GameState with ChangeNotifier {
     var game = GameState(
       facilities: [],
       blueprints: [],
+      powerups: [],
       storage: {},
       money: 5000000,
     );
@@ -29,9 +32,10 @@ class GameState with ChangeNotifier {
     return game;
   }
 
-  final List<Facility> facilities;
-  final Map<Item, int> storage;
-  final List<Blueprint> blueprints;
+  List<Facility> facilities;
+  Map<Item, int> storage;
+  List<Blueprint> blueprints;
+  List<Powerup> powerups;
   int money;
 
   SpeedSetting speedSetting;
@@ -41,8 +45,19 @@ class GameState with ChangeNotifier {
     required this.money,
     required this.storage,
     required this.blueprints,
+    required this.powerups,
     this.speedSetting = SpeedSetting.normal,
   });
+
+  void loadPreset(Preset preset) {
+    money = preset.money;
+    facilities = preset.facilities;
+    blueprints = preset.blueprints;
+    powerups = preset.powerups;
+    storage = preset.storage;
+
+    notifyListeners();
+  }
 
   void update() {
     var runningCost = 0;
@@ -83,40 +98,14 @@ class GameState with ChangeNotifier {
     changeMoney(-blueprint.cost);
   }
 
+  void addPowerup(Powerup powerup) {
+    powerups.add(powerup);
+    changeMoney(-powerup.price);
+  }
+
   void addBlueprint(Blueprint blueprint) {
     blueprints.add(blueprint);
     changeMoney(-blueprint.price);
-  }
-
-  bool fulfillsRequirementsFor(Blueprint blueprint, {bool purchase = false}) {
-    if (purchase) {
-      return money > blueprint.price;
-    }
-    return money > blueprint.cost;
-  }
-
-  double productionRate(Resource resource) {
-    var rate = 0.0;
-    for (var facility in facilities.whereType<ProcessingFacility>()) {
-      for (var output in facility.output) {
-        if (output.item == resource) {
-          rate += output.amount / (facility.time + facility.cooldown);
-        }
-      }
-    }
-    return rate;
-  }
-
-  double consumptionRate(Resource resource) {
-    var rate = 0.0;
-    for (var facility in facilities.whereType<ProductionFacility>()) {
-      for (var input in facility.input) {
-        if (input.item == resource) {
-          rate += input.amount / (facility.time + facility.cooldown);
-        }
-      }
-    }
-    return rate;
   }
 
   void togglePause(IOFacility facility) {
@@ -132,6 +121,17 @@ class GameState with ChangeNotifier {
   void changeStorage(Item item, int amount) {
     storage[item] = (storage[item] ?? 0) + amount;
     notifyListeners();
+  }
+
+  bool fulfillsRequirementsFor(Blueprint blueprint, {bool purchase = false}) {
+    if (purchase) {
+      return money > blueprint.price;
+    }
+    return money > blueprint.cost;
+  }
+
+  int get timeMultiplier {
+    return 1;
   }
 
   double get activeCost {
@@ -171,5 +171,29 @@ class GameState with ChangeNotifier {
     }
 
     return capacity;
+  }
+
+  double productionRate(Resource resource) {
+    var rate = 0.0;
+    for (var facility in facilities.whereType<ProcessingFacility>()) {
+      for (var output in facility.output) {
+        if (output.item == resource) {
+          rate += output.amount / (facility.time + facility.cooldown);
+        }
+      }
+    }
+    return rate;
+  }
+
+  double consumptionRate(Resource resource) {
+    var rate = 0.0;
+    for (var facility in facilities.whereType<ProductionFacility>()) {
+      for (var input in facility.input) {
+        if (input.item == resource) {
+          rate += input.amount / (facility.time + facility.cooldown);
+        }
+      }
+    }
+    return rate;
   }
 }

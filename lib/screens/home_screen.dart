@@ -1,12 +1,14 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import '../models/util/game_state.dart';
 import '../views/dashboard/dashboard.dart';
 import '../views/finance/balance_change_view.dart';
 import '../views/finance/balance_view.dart';
 import '../views/market/market.dart';
+import '../views/settings_modal.dart';
 import '../views/util/rm_tab_bar.dart';
 import '../views/util/rm_tab_item.dart';
 
@@ -101,6 +103,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 RMTabItem(
                   onTap: () {
+                    showCupertinoModalBottomSheet(
+                      context: context,
+                      isDismissible: false,
+                      enableDrag: false,
+                      duration: const Duration(milliseconds: 250),
+                      builder: (context) => const Scaffold(
+                        body: SettingsModal(),
+                      ),
+                    );
                     HapticFeedback.lightImpact();
                   },
                   widget: const Center(
