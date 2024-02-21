@@ -62,7 +62,7 @@ class CostPlaceholder extends Item {
 
   @override
   bool operator ==(Object other) {
-    if (other is CostPlaceholder) {
+    if (other is! CostPlaceholder) {
       return false;
     }
 

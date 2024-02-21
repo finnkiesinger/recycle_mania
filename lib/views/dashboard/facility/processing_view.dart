@@ -10,6 +10,7 @@ import 'facility_list_item.dart';
 import '../../../models/facility/processing_facility.dart';
 import '../../../models/util/game_state.dart';
 import 'processing_blueprint/processing_blueprint_list.dart';
+import 'processing_facility_details.dart';
 
 const processViewNodeHeight = 80.0;
 
@@ -57,11 +58,23 @@ class _ProcessingViewState extends State<ProcessingView> {
                     child: Align(
                       alignment: Alignment.topRight,
                       child: TapScale(
-                        onTap: () {},
+                        onTap: () {
+                          HapticFeedback.lightImpact();
+                          showCupertinoModalBottomSheet(
+                            context: context,
+                            enableDrag: false,
+                            duration: const Duration(milliseconds: 250),
+                            builder: (context) => Scaffold(
+                              body: ProcessingFacilityDetails(
+                                facility: processor,
+                              ),
+                            ),
+                          );
+                        },
                         child: const Icon(
-                          Icons.info_rounded,
+                          Icons.settings_rounded,
                           size: 32,
-                          color: Colors.white,
+                          color: Colors.white54,
                         ),
                       ),
                     ),

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
   final String text;
+  final bool top;
   const Header({
     super.key,
     required this.text,
+    this.top = true,
   });
 
   @override
@@ -12,7 +14,7 @@ class Header extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 16),
+        if (top) const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
