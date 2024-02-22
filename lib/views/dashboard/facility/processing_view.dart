@@ -65,7 +65,7 @@ class _ProcessingViewState extends State<ProcessingView> {
                             enableDrag: false,
                             duration: const Duration(milliseconds: 250),
                             builder: (context) => Scaffold(
-                              body: ProcessingFacilityDetails(
+                              body: IOFacilityDetails(
                                 facility: processor,
                               ),
                             ),

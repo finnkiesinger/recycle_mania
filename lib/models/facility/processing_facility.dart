@@ -1,3 +1,4 @@
+import '../../data/powerups.dart';
 import '../util/game_state.dart';
 import 'io_facility.dart';
 import '../util/output.dart';
@@ -56,7 +57,16 @@ abstract class ProcessingFacility extends IOFacility<Waste, Resource> {
       GameState.active.changeStorage(o.item, available);
 
       int sellAmount = o.amount - available;
-      GameState.active.changeMoney(sellAmount * o.item.price);
+      if (GameState.active.powerups.where((element) {
+        if (element is AutoSellPowerup) {
+          if (element.item == o.item) {
+            return true;
+          }
+        }
+        return false;
+      }).isNotEmpty) {
+        GameState.active.changeMoney(sellAmount * o.item.price);
+      }
     }
   }
 

@@ -42,7 +42,7 @@ class ProductionFacilityBlueprintDetails extends StatelessWidget {
           collapsed: true,
         ),
         const SizedBox(height: 16),
-        _ProfitBreakdown(
+        ProfitBreakdown(
           blueprint: blueprint,
           facility: facility,
         ),
@@ -51,10 +51,17 @@ class ProductionFacilityBlueprintDetails extends StatelessWidget {
   }
 }
 
-class _ProfitBreakdown extends StatelessWidget {
+class ProfitBreakdown extends StatelessWidget {
   final ProductionFacilityBlueprint blueprint;
   final ProductionFacility facility;
-  const _ProfitBreakdown({required this.blueprint, required this.facility});
+  final bool showConstructionCost;
+
+  const ProfitBreakdown({
+    super.key,
+    required this.blueprint,
+    required this.facility,
+    this.showConstructionCost = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +74,16 @@ class _ProfitBreakdown extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  const Text("Construction Cost:"),
-                  const Spacer(),
-                  Text("\$${blueprint.cost}"),
-                ],
-              ),
-              const SizedBox(height: 24.0),
+              if (showConstructionCost) ...[
+                Row(
+                  children: [
+                    const Text("Construction Cost:"),
+                    const Spacer(),
+                    Text("\$${blueprint.cost}"),
+                  ],
+                ),
+                const SizedBox(height: 24.0),
+              ],
               Row(
                 children: [
                   const Text("Operating Cost (per iteration):"),

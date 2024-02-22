@@ -7,7 +7,9 @@ import '../../../models/facility/production_facility.dart';
 import '../../../models/util/game_state.dart';
 import '../../util/bottom_dock.dart';
 import '../../util/dock_element.dart';
+import '../../util/tap_scale.dart';
 import 'facility_list_item.dart';
+import 'processing_facility_details.dart';
 import 'production_facility/production_facility_blueprint_list.dart';
 
 class ProductionView extends StatefulWidget {
@@ -46,7 +48,37 @@ class _ProductionViewState extends State<ProductionView> {
             itemBuilder: (context, index) {
               var producer = producers[index];
 
-              return FacilityListItem(facility: producer);
+              return Stack(
+                children: [
+                  FacilityListItem(facility: producer),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 24.0, top: 8.0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: TapScale(
+                        onTap: () {
+                          HapticFeedback.lightImpact();
+                          showCupertinoModalBottomSheet(
+                            context: context,
+                            enableDrag: false,
+                            duration: const Duration(milliseconds: 250),
+                            builder: (context) => Scaffold(
+                              body: IOFacilityDetails(
+                                facility: producer,
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.settings_rounded,
+                          size: 32,
+                          color: Colors.white54,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
             },
             separatorBuilder: (context, index) {
               return Padding(

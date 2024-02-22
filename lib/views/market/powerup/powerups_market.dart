@@ -41,6 +41,9 @@ class PowerupsMarket extends StatelessWidget {
 
         if (powerup is AutoSellPowerup) {
           child = AutoSellPowerupWidget(powerup: powerup);
+        } else if (powerup == Powerups.facilitySelling) {
+          child =
+              FacilitySellingPowerupWidget(powerup: Powerups.facilitySelling);
         }
 
         var inInventory = _inInventory(game, powerup);
@@ -172,6 +175,55 @@ class AutoSellPowerupWidget extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                powerup.description,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white70,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class FacilitySellingPowerupWidget extends StatelessWidget {
+  final Powerup powerup;
+  const FacilitySellingPowerupWidget({
+    super.key,
+    required this.powerup,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          decoration: ShapeDecoration(
+            shape: SmoothRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              smoothness: 1.0,
+            ),
+            color: Colors.white10,
+          ),
+          child: Text(
+            powerup.name,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         Row(

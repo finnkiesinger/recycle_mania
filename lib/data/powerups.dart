@@ -20,6 +20,12 @@ class Powerups {
   static final autoSellPaper = AutoSellPowerup(item: Resources.paper);
   static final autoSellPlastic = AutoSellPowerup(item: Resources.plastic);
   static final autoSellOrganic = AutoSellPowerup(item: Resources.organic);
+  static const facilitySelling = Powerup(
+    name: "Facility Selling",
+    description:
+        "When you remove one of your facilities, you get 50% of the construction cost back.",
+    price: 100000,
+  );
 
   static final List<Powerup> all = [
     autoSellOrganic,
@@ -27,5 +33,6 @@ class Powerups {
     autoSellGlass,
     autoSellMetal,
     autoSellPlastic,
+    facilitySelling,
   ];
 }

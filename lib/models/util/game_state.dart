@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/powerups.dart';
 import '../crafting/blueprint.dart';
 import '../crafting/facility_blueprint.dart';
 import '../crafting/io_facility_blueprint.dart';
@@ -71,6 +72,19 @@ class GameState with ChangeNotifier {
     }
 
     _changeMoney(-runningCost);
+  }
+
+  void removeFacility(Facility facility) {
+    facilities.remove(facility);
+    notifyListeners();
+
+    if (powerups.contains(Powerups.facilitySelling)) {
+      // Should be replaced by a safer transaction system
+      var blueprint = blueprints.firstWhere(
+          (element) => element.output.runtimeType == facility.runtimeType);
+
+      changeMoney(blueprint.cost ~/ 2);
+    }
   }
 
   void _changeMoney(int amount) {

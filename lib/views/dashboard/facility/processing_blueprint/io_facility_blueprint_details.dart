@@ -103,7 +103,7 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
           },
         ),
         if (facility is ProcessingFacility)
-          _CostBreakdown(
+          CostBreakdown(
             facility: facility as ProcessingFacility,
             blueprint: blueprint,
           ),
@@ -112,12 +112,15 @@ class IOFacilityBlueprintDetails extends StatelessWidget {
   }
 }
 
-class _CostBreakdown extends StatelessWidget {
+class CostBreakdown extends StatelessWidget {
   final ProcessingFacility facility;
   final IOFacilityBlueprint blueprint;
-  const _CostBreakdown({
+  final bool showConstructionCost;
+  const CostBreakdown({
+    super.key,
     required this.facility,
     required this.blueprint,
+    this.showConstructionCost = true,
   });
 
   @override
@@ -131,14 +134,16 @@ class _CostBreakdown extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  const Text("Construction Cost:"),
-                  const Spacer(),
-                  Text("\$${blueprint.cost}"),
-                ],
-              ),
-              const SizedBox(height: 24.0),
+              if (showConstructionCost) ...[
+                Row(
+                  children: [
+                    const Text("Construction Cost:"),
+                    const Spacer(),
+                    Text("\$${blueprint.cost}"),
+                  ],
+                ),
+                const SizedBox(height: 24.0),
+              ],
               Row(
                 children: [
                   const Text("Operating Cost (per iteration):"),
