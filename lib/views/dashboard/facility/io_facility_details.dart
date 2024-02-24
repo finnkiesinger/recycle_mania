@@ -127,7 +127,7 @@ class IOFacilityDetails extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             children: [
-              Expanded(child: Container()),
+              const Spacer(),
               const SizedBox(width: 16),
               Expanded(
                 child: ChargeButton(

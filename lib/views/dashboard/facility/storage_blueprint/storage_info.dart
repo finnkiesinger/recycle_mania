@@ -9,9 +9,12 @@ import '../../../../models/item/resource.dart';
 
 class StorageInfo extends StatelessWidget {
   final Blueprint blueprint;
+  final bool showTitle;
+
   const StorageInfo({
     super.key,
     required this.blueprint,
+    this.showTitle = true,
   });
 
   @override
@@ -78,13 +81,14 @@ class StorageInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "${item.name} Storage",
-                style: const TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 22,
+              if (showTitle)
+                Text(
+                  "${item.name} Storage",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 22,
+                  ),
                 ),
-              ),
               const SizedBox(height: 4),
               Row(
                 children: [

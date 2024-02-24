@@ -183,7 +183,7 @@ class _StorageFacilityBlueprintMarketItem extends StatelessWidget {
           const SizedBox(height: 32),
           Row(
             children: [
-              Expanded(child: Container()),
+              const Spacer(),
               const SizedBox(width: 16),
               Expanded(
                 child: AnimatedSwitcher(

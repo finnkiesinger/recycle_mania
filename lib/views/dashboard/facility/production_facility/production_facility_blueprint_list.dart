@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/crafting/production_facility_blueprint.dart';
 import '../../../../models/util/game_state.dart';
+import '../../../util/empty_list_placeholder.dart';
 import '../../../util/list_modal.dart';
 import 'production_facility_blueprint_element.dart';
 
@@ -19,6 +20,7 @@ class ProductionFacilityBlueprintList extends StatelessWidget {
 
     return ListModal(
       title: "Blueprints",
+      placeholder: const EmptyBlueprintListPlaceholder(),
       children: blueprints
           .map(
             (blueprint) =>

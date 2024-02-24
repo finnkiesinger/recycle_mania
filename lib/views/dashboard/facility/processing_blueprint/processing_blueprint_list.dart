@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../models/crafting/processing_facility_blueprint.dart';
 import '../../../../models/util/game_state.dart';
+import '../../../util/empty_list_placeholder.dart';
 import '../../../util/list_modal.dart';
 import 'io_facility_blueprint_list_element.dart';
 
@@ -23,6 +24,7 @@ class _ProcessingBlueprintListState extends State<ProcessingBlueprintList> {
 
     return ListModal(
         title: "Blueprints",
+        placeholder: const EmptyBlueprintListPlaceholder(),
         children: blueprints
             .map(
               (blueprint) =>

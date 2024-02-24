@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               index: _index,
               children: [
                 RMTabItem(
-                  icon: Icons.dashboard_rounded,
+                  icon: Icons.factory_rounded,
                   active: _index == 0,
                   onTap: () {
                     if (_index != 0) {
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 RMTabItem(
-                  icon: Icons.shopping_bag_rounded,
+                  icon: Icons.shopping_cart_rounded,
                   active: _index == 1,
                   onTap: () {
                     if (_index != 1) {
