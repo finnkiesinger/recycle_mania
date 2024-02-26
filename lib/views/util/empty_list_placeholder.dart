@@ -62,32 +62,6 @@ class EmptyFacilityListPlaceholder extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(height: 64),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Icon(
-                Icons.factory_rounded,
-                color: Color.fromARGB(255, 100, 100, 100),
-                size: 48,
-              ),
-              Icon(
-                Icons.block_rounded,
-                color: Color.fromARGB(255, 70, 70, 70),
-                size: 108,
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          Text(
-            "You don't have any facilities yet!",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white60,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
           Spacer(),
           Text(
             "Build your first facility",
@@ -119,31 +93,6 @@ class EmptyStorageFacilityListPlaceholder extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          SizedBox(height: 24),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Icon(
-                Icons.factory_rounded,
-                color: Color.fromARGB(255, 100, 100, 100),
-              ),
-              Icon(
-                Icons.block_rounded,
-                color: Color.fromARGB(255, 70, 70, 70),
-                size: 72,
-              ),
-            ],
-          ),
-          SizedBox(height: 8),
-          Text(
-            "You don't have any facilities yet!",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white60,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
           Spacer(),
           Text(
             "Build your first facility",
