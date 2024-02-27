@@ -41,6 +41,9 @@ class OldComputersProcessingFacility extends ProcessingFacility {
   IOFacility<Waste, Resource> create() {
     return OldComputersProcessingFacility();
   }
+
+  @override
+  String get storageType => "OLD_COMPUTERS_PROCESSING_FACILITY";
 }
 
 class ComputerProductionFacility extends ProductionFacility {
@@ -108,4 +111,11 @@ class Facilities {
   static final computersProductionFacility = ComputerProductionFacility();
   static final metalStorageFacility = MetalStorageFacility();
   static final plasticStorageFacility = PlasticStorageFacility();
+
+  static final all = [
+    oldComputersProcessingFacility,
+    computersProductionFacility,
+    metalStorageFacility,
+    plasticStorageFacility,
+  ];
 }
