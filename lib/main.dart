@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'models/util/game_manager.dart';
 import 'models/util/game_state.dart';
+import 'screens/main_menu_screen.dart';
 import 'views/game_view.dart';
+import 'views/recycle_mania_wrapper.dart';
 
 void main() {
   runApp(RecycleMania());
@@ -14,14 +17,12 @@ const defaultTextStyle = TextStyle(
 );
 
 class RecycleMania extends StatelessWidget {
-  RecycleMania({super.key});
-
-  final _game = GameState.create();
+  const RecycleMania({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _game,
+    return ChangeNotifierProvider<GameManager>.value(
+      value: GameManager(),
       child: MaterialApp(
         title: 'Recycle Mania',
         debugShowCheckedModeBanner: false,
@@ -33,10 +34,8 @@ class RecycleMania extends StatelessWidget {
                 bodyMedium: defaultTextStyle,
               ),
         ),
-        home: Scaffold(
-          body: GameView(
-            state: _game,
-          ),
+        home: const Scaffold(
+          body: RecycleManiaWrapper(),
         ),
       ),
     );

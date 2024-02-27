@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/facilities.dart';
 import '../../data/powerups.dart';
 import '../crafting/blueprint.dart';
 import '../crafting/facility_blueprint.dart';
@@ -14,6 +15,7 @@ import '../facility/storage_facility.dart';
 import '../item/item.dart';
 import '../powerup/powerup.dart';
 import 'preset.dart';
+import 'processing_facility_storage.dart';
 
 enum SpeedSetting { normal, paused }
 
@@ -209,5 +211,53 @@ class GameState with ChangeNotifier {
       }
     }
     return rate;
+  }
+}
+
+class GameStorage {
+  static final ProcessingFacilityStorage _processingFacilityStorage =
+      ProcessingFacilityStorage();
+
+  Map<String, dynamic> toJSON(GameState state) {
+    return {
+      "facilities": state.facilities.map((facility) {
+        if (facility is ProcessingFacility) {
+          return _processingFacilityStorage.toJSON(facility);
+        }
+        if (facility is ProductionFacility) {}
+        if (facility is StorageFacility) {}
+      }),
+      "blueprints": [],
+      "money": state.money,
+      "powerups": state.powerups.map((e) => e.name),
+      "storage": state.storage.map((key, value) => MapEntry(key.name, value)),
+    };
+  }
+
+  static GameState fromJSON(Map<String, dynamic> json) {
+    List<Facility> facilities =
+        List<Map<String, dynamic>>.from(json["facilities"]).map((facilityJson) {
+      if (facilityJson["type"] == "PROCESSING_FACILITY") {
+        var facility =
+            ProcessingFacilityStorage().fromJSON(facilityJson["data"]);
+        if (facility != null) {
+          return facility;
+        }
+      }
+
+      if (facilityJson["type"] == "PRODUCTION_FACILTIY") {}
+
+      if (facilityJson["type"] == "STORAGE_FACILITY") {}
+
+      return Facilities.oldComputersProcessingFacility;
+    }).toList();
+
+    return GameState(
+      facilities: facilities,
+      money: 50000,
+      storage: {},
+      blueprints: [],
+      powerups: [],
+    );
   }
 }

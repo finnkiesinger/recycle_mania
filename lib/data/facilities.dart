@@ -75,6 +75,9 @@ class ComputerProductionFacility extends ProductionFacility {
   IOFacility<Resource, Product> create() {
     return ComputerProductionFacility();
   }
+
+  @override
+  String get storageType => "COMPUTER_PRODUCTION_FACILITY";
 }
 
 class MetalStorageFacility extends StorageFacility<Metal> {
@@ -89,6 +92,9 @@ class MetalStorageFacility extends StorageFacility<Metal> {
   Facility create() {
     return MetalStorageFacility();
   }
+
+  @override
+  String get storageType => "METAL_STORAGE_FACILITY";
 }
 
 class PlasticStorageFacility extends StorageFacility<Plastic> {
@@ -103,6 +109,9 @@ class PlasticStorageFacility extends StorageFacility<Plastic> {
   Facility create() {
     return PlasticStorageFacility();
   }
+
+  @override
+  String get storageType => "PLASTIC_STORAGE_FACILITY";
 }
 
 class Facilities {
