@@ -31,6 +31,7 @@ class Particle {
   double y;
   double speed;
   final Color color;
+  final double size;
 
   Particle({
     required this.x,
@@ -38,6 +39,7 @@ class Particle {
     required this.speed,
     required this.icon,
     required this.color,
+    required this.size,
   });
 
   void update(int elapsed) {
@@ -72,7 +74,7 @@ class _ParticleSystemWidgetState extends State<ParticleSystemWidget>
   static final random = Random();
   late Ticker _ticker;
 
-  double get baseSpeed => 0.5 * widget.height / widget.baseTime;
+  double get baseSpeed => 0.25 * widget.height / widget.baseTime;
 
   final List<Particle> _particles = [];
   var _spawnAccu = 0;
@@ -103,9 +105,10 @@ class _ParticleSystemWidgetState extends State<ParticleSystemWidget>
           y: 0.0,
           speed: baseSpeed * (0.25 + 0.25 * random.nextDouble()),
           color: color!,
+          size: 0.75 + 0.5 * random.nextDouble(),
         ));
 
-        _nextParticleTime = 500 + (1000 * random.nextDouble()).floor();
+        _nextParticleTime = 3000;
         _spawnAccu = 0;
       }
 
@@ -143,11 +146,11 @@ class _ParticleSystemWidgetState extends State<ParticleSystemWidget>
             top: e.y,
             left: e.x,
             child: Opacity(
-              opacity: 0.8 * min(e.y, 200) / 200,
+              opacity: min(e.y, 50) / 50,
               child: Icon(
                 e.icon,
                 color: e.color,
-                size: 42,
+                size: 56 * e.size,
               ),
             ),
           ),

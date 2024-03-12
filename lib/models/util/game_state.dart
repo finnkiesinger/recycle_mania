@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/facilities.dart';
@@ -218,18 +219,25 @@ class GameStorage {
   static final ProcessingFacilityStorage _processingFacilityStorage =
       ProcessingFacilityStorage();
 
-  Map<String, dynamic> toJSON(GameState state) {
+  static Map<String, dynamic> toJSON(GameState state) {
     return {
-      "facilities": state.facilities.map((facility) {
-        if (facility is ProcessingFacility) {
-          return _processingFacilityStorage.toJSON(facility);
-        }
-        if (facility is ProductionFacility) {}
-        if (facility is StorageFacility) {}
-      }),
+      "facilities": state.facilities
+          .map((facility) {
+            if (facility is ProcessingFacility) {
+              return _processingFacilityStorage.toJSON(facility);
+            }
+            if (facility is ProductionFacility) {
+              return null;
+            }
+            if (facility is StorageFacility) {
+              return null;
+            }
+          })
+          .whereNotNull()
+          .toList(),
       "blueprints": [],
       "money": state.money,
-      "powerups": state.powerups.map((e) => e.name),
+      "powerups": state.powerups.map((e) => e.name).toList(),
       "storage": state.storage.map((key, value) => MapEntry(key.name, value)),
     };
   }
@@ -254,7 +262,7 @@ class GameStorage {
 
     return GameState(
       facilities: facilities,
-      money: 50000,
+      money: json["money"],
       storage: {},
       blueprints: [],
       powerups: [],

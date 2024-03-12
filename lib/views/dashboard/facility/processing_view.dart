@@ -13,7 +13,7 @@ import '../../../models/util/game_state.dart';
 import 'processing_blueprint/processing_blueprint_list.dart';
 import 'io_facility_details.dart';
 
-const processViewNodeHeight = 80.0;
+const processViewNodeHeight = 94.0;
 
 class ProcessingView extends StatefulWidget {
   const ProcessingView({super.key});

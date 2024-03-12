@@ -7,12 +7,14 @@ class OutlineButton extends StatelessWidget {
   final Function() onTap;
   final Color color;
   final String text;
+  final Color backgroundColor;
 
   const OutlineButton({
     super.key,
     this.color = Colors.black,
     required this.text,
     required this.onTap,
+    this.backgroundColor = Colors.transparent,
   });
 
   @override
@@ -30,6 +32,7 @@ class OutlineButton extends StatelessWidget {
               color: color,
             ),
           ),
+          color: backgroundColor,
         ),
         child: Center(
           child: Text(

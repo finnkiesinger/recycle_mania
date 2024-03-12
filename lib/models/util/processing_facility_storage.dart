@@ -12,8 +12,22 @@ class ProcessingFacilityStorage extends StorageManager<ProcessingFacility> {
         "time": facility.time,
         "cost": facility.cost,
         "name": facility.name,
-        "input": [],
-        "output": [],
+        "input": facility.input
+            .map(
+              (e) => {
+                "item": e.item.name,
+                "amount": e.amount,
+              },
+            )
+            .toList(),
+        "output": facility.output
+            .map(
+              (e) => {
+                "item": e.item.name,
+                "amount": e.amount,
+              },
+            )
+            .toList(),
       },
     };
   }

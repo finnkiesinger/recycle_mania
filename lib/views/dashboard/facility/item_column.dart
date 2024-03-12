@@ -103,7 +103,7 @@ class ItemColumn extends StatelessWidget {
         ...io.map(
           (io) => SizedBox(
             height: processViewNodeHeight,
-            width: 80,
+            width: 94,
             child: Center(
               child: _buildNode(io),
             ),

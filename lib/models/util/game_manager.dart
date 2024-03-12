@@ -7,9 +7,12 @@ class GameManager with ChangeNotifier {
 
   void setGame(GameState game) {
     this.game = game;
+    GameState.active = game;
+    notifyListeners();
   }
 
   void closeGame() {
     game = null;
+    notifyListeners();
   }
 }

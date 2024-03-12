@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:provider/provider.dart';
+import '../models/util/game_manager.dart';
+import '../models/util/game_state.dart';
 import '../views/util/color_button.dart';
-import '../views/util/outline_button.dart';
 import '../views/util/particle_system_widget.dart';
 
 class MainMenuScreen extends StatelessWidget {
@@ -11,6 +14,8 @@ class MainMenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var manager = context.watch<GameManager>();
+
     return Stack(
       children: [
         Container(
@@ -33,6 +38,27 @@ class MainMenuScreen extends StatelessWidget {
             );
           },
         ),
+        BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 3,
+            sigmaY: 3,
+          ),
+          child: Opacity(
+            opacity: 0.7,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF87FF5E),
+                    Color(0xFF42FFBB),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
         SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,42 +78,20 @@ class MainMenuScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ColorButton(
-                        onTap: () {
+                        onTap: () async {
                           HapticFeedback.lightImpact();
+                          manager.setGame(GameState.create());
                         },
                         color: const Color(0xFF002877),
-                        textColor: const Color(0xFF42FFBB),
-                        text: "New Game",
+                        textColor: Color.lerp(
+                          const Color(0xFF87FF5E),
+                          const Color(0xFF42FFBB),
+                          0.85,
+                        )!,
+                        text: "Start Game",
                       ),
                     ),
                   ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: OutlineButton(
-                        onTap: () {
-                          HapticFeedback.lightImpact();
-                        },
-                        color: const Color(0xFF002877),
-                        text: "Load Game",
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 72),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: ColorButton(
-                  text: "RECYCLE RUMBLE",
-                  onTap: () {},
-                  textColor: const Color(0xFF42FFBB),
-                  color: const Color(0xFF002877),
                 ),
               ),
               const SizedBox(height: 64),

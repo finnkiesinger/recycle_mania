@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -101,30 +102,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       ? const Color.fromARGB(255, 0, 163, 95)
                       : const Color.fromARGB(255, 231, 48, 35),
                 ),
-                RMTabItem(
-                  onTap: () {
-                    showCupertinoModalBottomSheet(
-                      context: context,
-                      isDismissible: false,
-                      enableDrag: false,
-                      duration: const Duration(milliseconds: 250),
-                      builder: (context) => const Scaffold(
-                        body: SettingsModal(),
-                      ),
-                    );
-                    HapticFeedback.lightImpact();
-                  },
-                  widget: const Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 4.0),
-                      child: Icon(
-                        Icons.settings_rounded,
-                        color: Colors.white,
-                        size: 36,
+                if (kDebugMode)
+                  RMTabItem(
+                    onTap: () {
+                      showCupertinoModalBottomSheet(
+                        context: context,
+                        isDismissible: false,
+                        enableDrag: false,
+                        duration: const Duration(milliseconds: 250),
+                        builder: (context) => const Scaffold(
+                          body: SettingsModal(),
+                        ),
+                      );
+                      HapticFeedback.lightImpact();
+                    },
+                    widget: const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 4.0),
+                        child: Icon(
+                          Icons.settings_rounded,
+                          color: Colors.white,
+                          size: 36,
+                        ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

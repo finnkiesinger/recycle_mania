@@ -72,7 +72,7 @@ class _FacilityListItemState extends State<FacilityListItem> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 80,
+                      width: 94,
                       height: max(widget.facility.input.length,
                               widget.facility.output.length) *
                           processViewNodeHeight,
@@ -81,7 +81,7 @@ class _FacilityListItemState extends State<FacilityListItem> {
                       input: widget.facility.input,
                       output: widget.facility.output,
                     ),
-                    const SizedBox(width: 80),
+                    const SizedBox(width: 94),
                   ],
                 ),
                 Row(

@@ -11,7 +11,7 @@ abstract mixin class TimedObject {
 
   void step() {
     if (_paused) return;
-    
+
     if (_active || _coolingDown) {
       _accumulator++;
       if (_active) {
@@ -71,5 +71,21 @@ abstract mixin class TimedObject {
     }
 
     return 0.0;
+  }
+
+  void setAccu(int accu) {
+    _accumulator = accu;
+  }
+
+  void setPaused(bool paused) {
+    _paused = paused;
+  }
+
+  void setActive(bool active) {
+    _active = active;
+  }
+
+  void setCoolingDown(bool coolingDown) {
+    _coolingDown = coolingDown;
   }
 }
