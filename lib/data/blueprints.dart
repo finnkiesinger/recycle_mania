@@ -237,6 +237,48 @@ class MetalScrapProcessingFacilityBlueprint
   }
 }
 
+class OldGlassBottleProcessingFacilityBlueprint
+    extends ProcessingFacilityBlueprint {
+  OldGlassBottleProcessingFacilityBlueprint()
+      : super(
+          facility: Facilities.oldGlassBottlesProcessingFacility,
+          requirements: [
+            const Input(
+              item: CraftingItems.glassSortingFacility,
+              amount: 1,
+            ),
+            const Input(
+              item: CraftingItems.crushingStation,
+              amount: 1,
+            ),
+            const Input(
+              item: CraftingItems.glassFurnace,
+              amount: 1,
+            ),
+            const Input(
+              item: CraftingItems.moldingStation,
+              amount: 1,
+            ),
+            const Input(
+              item: CraftingItems.annealingOven,
+              amount: 1,
+            ),
+            const Input(
+              item: CraftingItems.inspectionStation,
+              amount: 1,
+            ),
+          ],
+          price: 15000,
+          description:
+              "Glass bottles are sorted by color, crushed into small pieces, cleaned of contaminants, melted down, and then molded or blown into new bottles or other glass products.",
+        );
+
+  @override
+  Blueprint create() {
+    return MetalScrapProcessingFacilityBlueprint();
+  }
+}
+
 ///
 /// PRODUCTION BLUEPRINTS
 ///

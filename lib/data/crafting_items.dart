@@ -252,6 +252,72 @@ class SolidificationStation extends Item {
         );
 }
 
+class GlassSortingFacility extends Item {
+  const GlassSortingFacility()
+      : super(
+          icon: const RMIcon(icon: Icons.sort),
+          name: "Sorting Facility",
+          price: 1000,
+          description:
+              "Glass bottles are sorted by color (clear, green, brown) to ensure the purity of the recycled glass.",
+        );
+}
+
+class CrushingStation extends Item {
+  const CrushingStation()
+      : super(
+          icon: const RMIcon(icon: Icons.compress_rounded),
+          name: "Crushing Station",
+          price: 2500,
+          description:
+              "Crushes glass bottles into cullet for efficient melting.",
+        );
+}
+
+class GlassFurnace extends Item {
+  const GlassFurnace()
+      : super(
+          icon: const RMIcon(icon: Icons.local_fire_department),
+          name: "Glass Furnace",
+          price: 10000,
+          description:
+              "Melts down cullet into molten glass at extremely high temperatures.",
+        );
+}
+
+class MoldingStation extends Item {
+  const MoldingStation()
+      : super(
+          icon: const RMIcon(icon: Icons.format_shapes),
+          name: "Molding Station",
+          price: 7500,
+          description:
+              "Uses molten glass to create new bottles through a molding process.",
+        );
+}
+
+class AnnealingOven extends Item {
+  const AnnealingOven()
+      : super(
+          icon: const RMIcon(icon: Icons.thermostat),
+          name: "Annealing Oven",
+          price: 6000,
+          description:
+              "Newly formed bottles undergo controlled cooling to strengthen the glass.",
+        );
+}
+
+class InspectionStation extends Item {
+  const InspectionStation()
+      : super(
+          icon: const RMIcon(icon: Icons.checklist_rounded),
+          name: "Inspection Station",
+          price: 3000,
+          description:
+              "Recycled glass products are checked for quality before packaging.",
+        );
+}
+
 class CostPlaceholder extends Item {
   const CostPlaceholder({required super.price})
       : super(
@@ -295,6 +361,12 @@ class CraftingItems {
   static const metalMeltingStation = MetalMeltingStation();
   static const purificationStation = PurificationStation();
   static const solidificationStation = SolidificationStation();
+  static const glassSortingFacility = GlassSortingFacility();
+  static const crushingStation = CrushingStation();
+  static const glassFurnace = GlassFurnace();
+  static const annealingOven = AnnealingOven();
+  static const moldingStation = MoldingStation();
+  static const inspectionStation = InspectionStation();
 
   static CostPlaceholder costPlaceholder(int cost) {
     return CostPlaceholder(price: cost);

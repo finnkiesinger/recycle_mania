@@ -200,6 +200,36 @@ class OldPlasticBottlesProcessingFacility extends ProcessingFacility {
   String get storageType => "OLD_PLASTIC_BOTTLES_PROCESSING_FACILITY";
 }
 
+class OldGlassBottlesProcessingFacility extends ProcessingFacility {
+  OldGlassBottlesProcessingFacility()
+      : super(
+          name: "Glass Bottles",
+          cost: 1,
+          input: [
+            const Input(
+              item: oldGlassBottles,
+              amount: 1,
+            ),
+          ],
+          output: [
+            const Output(
+              item: Resources.glass,
+              amount: 1,
+            ),
+          ],
+          time: 5,
+          cooldown: 3,
+        );
+
+  @override
+  IOFacility<Waste, Resource> create() {
+    return OldPlasticBottlesProcessingFacility();
+  }
+
+  @override
+  String get storageType => "OLD_PLASTIC_BOTTLES_PROCESSING_FACILITY";
+}
+
 ///
 /// PRODUCTION FACILITIES
 ///
@@ -460,6 +490,8 @@ class Facilities {
   static final metalScrapsProcessingFacility = MetalScrapsProcessingFacility();
   static final oldPlasticBottlesProcessingFacility =
       OldPlasticBottlesProcessingFacility();
+  static final oldGlassBottlesProcessingFacility =
+      OldGlassBottlesProcessingFacility();
 
   static final metalStorageFacility = MetalStorageFacility();
   static final plasticStorageFacility = PlasticStorageFacility();
@@ -481,6 +513,7 @@ class Facilities {
     mixedPaperProcessingFacility,
     metalScrapsProcessingFacility,
     oldPlasticBottlesProcessingFacility,
+    oldGlassBottlesProcessingFacility,
     // Storage
     metalStorageFacility,
     plasticStorageFacility,

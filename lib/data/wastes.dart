@@ -50,3 +50,11 @@ const oldPlasticBottles = Waste(
     icon: Icons.liquor_rounded,
   ),
 );
+
+const oldGlassBottles = Waste(
+  name: "Old Glass Bottles",
+  price: 1,
+  icon: RMIcon(
+    icon: Icons.liquor_rounded,
+  ),
+);
